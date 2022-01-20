@@ -11,15 +11,15 @@ struct sizeMismatch : public std::exception
     }
 };
 
-class mat
+class Matrix
 {
 public:
     int row;
     int col;
     vector<vector<float>> elements;
 
-    mat() {}
-    mat(string filename)
+    Matrix() {}
+    Matrix(string filename)
     {
         ifstream input_file(filename);
         int r, c;
@@ -47,12 +47,12 @@ public:
         vector<float> row = elements.at(i);
         return row.at(j);
     }
-    mat relu()
+    Matrix relu()
     {
-        mat ret;
+        Matrix Matrix_return;
         vector<vector<float>> elem;
-        ret.row = row;
-        ret.col = col;
+        Matrix_return.row = row;
+        Matrix_return.col = col;
 
         for (int r = 0; r < row; r++)
         {
@@ -65,16 +65,16 @@ public:
             }
             elem.push_back(col_vec);
         }
-        ret.elements = elem;
+        Matrix_return.elements = elem;
 
-        return ret;
+        return Matrix_return;
     }
-    mat mat_tanh()
+    Matrix matrix_tanh()
     {
-        mat ret;
+        Matrix Matrix_return;
         vector<vector<float>> elem;
-        ret.row = row;
-        ret.col = col;
+        Matrix_return.row = row;
+        Matrix_return.col = col;
 
         for (int r = 0; r < row; r++)
         {
@@ -86,16 +86,16 @@ public:
             }
             elem.push_back(col_vec);
         }
-        ret.elements = elem;
+        Matrix_return.elements = elem;
 
-        return ret;
+        return Matrix_return;
     }
-    mat max_pooling(int stride)
+    Matrix max_pooling(int stride)
     {
-        mat ret;
+        Matrix Matrix_return;
         vector<vector<float>> elem;
-        ret.row = row / stride;
-        ret.col = col / stride;
+        Matrix_return.row = row / stride;
+        Matrix_return.col = col / stride;
 
         for (int r = 0; r < row; r += stride)
         {
@@ -114,17 +114,17 @@ public:
             }
             elem.push_back(col_vec);
         }
-        ret.elements = elem;
+        Matrix_return.elements = elem;
 
-        return ret;
+        return Matrix_return;
     }
 
-    mat avg_pooling(mat m1, int stride)
+    Matrix avg_pooling(int stride)
     {
-        mat ret;
+        Matrix Matrix_return;
         vector<vector<float>> elem;
-        ret.row = row / stride;
-        ret.col = col / stride;
+        Matrix_return.row = row / stride;
+        Matrix_return.col = col / stride;
 
         for (int r = 0; r < row; r += stride)
         {
@@ -144,79 +144,132 @@ public:
             }
             elem.push_back(col_vec);
         }
-        ret.elements = elem;
+        Matrix_return.elements = elem;
 
-        return ret;
+        return Matrix_return;
     }
 };
 
-mat operator*(mat m1, mat m2)
+Matrix operator*(Matrix Matrix_1, Matrix Matrix_2)
 {
-    mat ret;
+    Matrix Matrix_return;
     vector<vector<float>> elem;
     try
     {
-        if (m1.col != m2.row)
+        if (Matrix_1.col != Matrix_2.row)
         {
             throw sizeMismatch();
         }
-        ret.row = m1.row;
-        ret.col = m2.col;
+        Matrix_return.row = Matrix_1.row;
+        Matrix_return.col = Matrix_2.col;
 
-        for (int r = 0; r < m1.row; r++)
+        for (int r = 0; r < Matrix_1.row; r++)
         {
             vector<float> col;
-            for (int c = 0; c < m2.col; c++)
+            for (int c = 0; c < Matrix_2.col; c++)
             {
                 float val = 0.0f;
-                for (int i = 0; i < m1.col; i++)
+                for (int i = 0; i < Matrix_1.col; i++)
                 {
-                    val += m1.getElement(r, i) * m2.getElement(i, c);
+                    val += Matrix_1.getElement(r, i) * Matrix_2.getElement(i, c);
                 }
                 col.push_back(val);
             }
             elem.push_back(col);
         }
-        ret.elements = elem;
+        Matrix_return.elements = elem;
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
-    return ret;
+    return Matrix_return;
 }
 
-mat operator+(mat m1, mat m2)
+Matrix operator+(Matrix Matrix_1, Matrix Matrix_2)
 {
-    mat ret;
+    Matrix Matrix_return;
     vector<vector<float>> elem;
     try
     {
-        if (m1.row != m2.row || m1.col != m2.col)
+        if (Matrix_1.row != Matrix_2.row || Matrix_1.col != Matrix_2.col)
         {
             throw sizeMismatch();
         }
-        ret.row = m1.row;
-        ret.col = m1.col;
+        Matrix_return.row = Matrix_1.row;
+        Matrix_return.col = Matrix_1.col;
 
-        for (int r = 0; r < m1.row; r++)
+        for (int r = 0; r < Matrix_1.row; r++)
         {
             vector<float> col;
-            for (int c = 0; c < m1.col; c++)
+            for (int c = 0; c < Matrix_1.col; c++)
             {
-                float val = m1.getElement(r, c) + m2.getElement(r, c);
+                float val = Matrix_1.getElement(r, c) + Matrix_2.getElement(r, c);
                 col.push_back(val);
             }
             elem.push_back(col);
         }
-        ret.elements = elem;
+        Matrix_return.elements = elem;
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
-    return ret;
+    return Matrix_return;
 }
+
+
+class Vector{
+    public:
+    int size;
+    vector<float> elements;
+    Vector() {}
+    Vector(string filename)
+    {
+        ifstream input_file(filename);
+        int i = 0;
+        vector<float> elem;
+        float read;
+
+        while (input_file >> read)
+        {
+            elements.push_back(read);
+            i+=1;
+        }
+        size = i;
+    }
+
+    Vector sigmoid(){
+        Vector Vector_return;
+        Vector_return.size = size;
+        for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
+        {
+            float ele = *iter;
+            ele = 1 /(1 + exp(-ele));
+            Vector_return.elements.push_back(ele);
+        }
+        return Vector_return;
+    }
+    Vector softmax(){
+        Vector Vector_return;
+        Vector_return.size = size;
+        float sum = 0;
+        for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
+        {
+            float ele = *iter;
+            sum += exp(ele);
+        }
+        for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
+        {
+            float ele = *iter;
+            ele = exp(ele)/sum;
+            Vector_return.elements.push_back(ele);
+        }
+        return Vector_return;
+    }
+
+};
+
 
 int main()
 {
