@@ -16,6 +16,7 @@ struct mat
 {
     int row;
     int col;
+    
     vector<vector<float>> elements;
 };
 
