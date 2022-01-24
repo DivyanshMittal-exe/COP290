@@ -1,53 +1,56 @@
-#include <iostream>
-#include <fstream>
-#include <bits/stdc++.h>
+#include "Matrix.h"
+
 using namespace std;
 
-struct sizeMismatch : public std::exception
-{
-    const char *what() const throw()
+const char * sizeMismatch::what () const throw ()
     {
-        return "Matrix size mismatch";
+    	return "Size Incompatible";
     }
-};
 
-class Matrix
-{
-public:
-    int row;
-    int col;
-    vector<vector<float>> elements;
-
-    Matrix() {}
-    Matrix(string filename)
+Matrix::Matrix(string filename)
     {
         ifstream input_file(filename);
-        int r, c;
-        input_file >> r;
-        input_file >> c;
+        int r=0, c=0;
+        float read;
+
+        while (input_file >> read)
+        {   
+            r++;
+            if(input_file.peek() == '\n'){
+                break;
+            }
+        }
+        vector<vector<float>> elem(r);
+
+        input_file.seekg(0);
+        vector< vector<float> >::iterator col_it;
+        col_it = elem.begin();
+        while (input_file >> read)
+        {   
+            col_it->push_back(read);
+            col_it++;
+            if(input_file.peek() == '\n'){
+                col_it = elem.begin();
+                c++;
+            }
+        }
         row = r;
         col = c;
-        vector<vector<float>> elem;
 
-        for (int i = 0; i < r; i++)
-        {
-            vector<float> col;
-            for (int j = 0; j < c; j++)
-            {
-                float val;
-                input_file >> val;
-                col.push_back(val);
-            }
-            elem.push_back(col);
-        }
-        elements = elem;
     }
-    float getElement(int i, int j)
+
+Matrix::Matrix(){
+    row = 0;
+    col = 0;
+}
+
+float Matrix::getElement(int i, int j)
     {
         vector<float> row = elements.at(i);
         return row.at(j);
     }
-    Matrix relu()
+
+Matrix Matrix::relu()
     {
         Matrix Matrix_return;
         vector<vector<float>> elem;
@@ -69,7 +72,11 @@ public:
 
         return Matrix_return;
     }
-    Matrix matrix_tanh()
+
+
+
+
+Matrix Matrix::matrix_tanh()
     {
         Matrix Matrix_return;
         vector<vector<float>> elem;
@@ -90,7 +97,8 @@ public:
 
         return Matrix_return;
     }
-    Matrix max_pooling(int stride)
+
+Matrix Matrix::max_pooling(int stride)
     {
         Matrix Matrix_return;
         vector<vector<float>> elem;
@@ -119,7 +127,7 @@ public:
         return Matrix_return;
     }
 
-    Matrix avg_pooling(int stride)
+Matrix Matrix::avg_pooling(int stride)
     {
         Matrix Matrix_return;
         vector<vector<float>> elem;
@@ -148,7 +156,20 @@ public:
 
         return Matrix_return;
     }
-};
+
+
+void Matrix:: print(){
+    vector< vector<float> >::iterator r;
+    vector<float>::iterator c;
+
+    for (r = elements.begin(); r != elements.end(); r++) {
+        for (c = r->begin(); c != r->end(); c++) {
+            cout << *c << " ";
+        }
+        cout << endl;
+    }
+}
+
 
 Matrix operator*(Matrix Matrix_1, Matrix Matrix_2)
 {
@@ -216,63 +237,4 @@ Matrix operator+(Matrix Matrix_1, Matrix Matrix_2)
         std::cerr << e.what() << '\n';
     }
     return Matrix_return;
-}
-
-
-class Vector{
-    public:
-    int size;
-    vector<float> elements;
-    Vector() {}
-    Vector(string filename)
-    {
-        ifstream input_file(filename);
-        int i = 0;
-        vector<float> elem;
-        float read;
-
-        while (input_file >> read)
-        {
-            elements.push_back(read);
-            i+=1;
-        }
-        size = i;
-    }
-
-    Vector sigmoid(){
-        Vector Vector_return;
-        Vector_return.size = size;
-        for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
-        {
-            float ele = *iter;
-            ele = 1 /(1 + exp(-ele));
-            Vector_return.elements.push_back(ele);
-        }
-        return Vector_return;
-    }
-    Vector softmax(){
-        Vector Vector_return;
-        Vector_return.size = size;
-        float sum = 0;
-        for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
-        {
-            float ele = *iter;
-            sum += exp(ele);
-        }
-        for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
-        {
-            float ele = *iter;
-            ele = exp(ele)/sum;
-            Vector_return.elements.push_back(ele);
-        }
-        return Vector_return;
-    }
-
-};
-
-
-int main()
-{
-
-    return 0;
 }
