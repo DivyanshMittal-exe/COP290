@@ -14,6 +14,7 @@
         "valarray": "cpp",
         "cmath": "c",
         "complex": "c",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "iostream": "cpp"
     }
 }

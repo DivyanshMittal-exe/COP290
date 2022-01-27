@@ -8,16 +8,16 @@
     Vector::Vector(string filename)
     {
         ifstream input_file(filename);
-        int i = 0;
-        vector<float> elem;
-        float read;
+        input_file >> size;
+        vector<float> elems(size,0);
 
-        while (input_file >> read)
-        {
-            elements.push_back(read);
-            i+=1;
-        }
-        size = i;
+            for (int i = 0; i <  size; i++)
+            {   
+                    float val;
+                    input_file >> val;
+                    elems[i] = val;   
+            }
+            elements = elems;
     }
 
     Vector Vector::sigmoid(){
@@ -43,16 +43,17 @@
         for (auto iter = elements.cbegin(); iter != elements.cend(); ++iter)
         {
             float ele = *iter;
-            ele = exp(ele)/sum;
-            Vector_return.elements.push_back(ele);
+            float el = exp(ele)/sum;
+            Vector_return.elements.push_back(el);
         }
         return Vector_return;
     }
 
-    void Vector:: print(){
-    vector<float>::iterator it;
-        for (it = elements.begin(); it != elements.end(); it++) {
-            cout << *it << " ";
-        }
-        cout << endl;
+    void Vector:: print(string filename){
+    ofstream output_file(filename);
+    output_file << size << endl;
+    for (int i = 0; i <  size; i++)
+    {   
+        output_file << elements[i] << endl;
+    }
 }

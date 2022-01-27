@@ -19,7 +19,7 @@ class Vector{
 
     Vector sigmoid();
     Vector softmax();
-    void print();
+    void print(string filename);
 };
 
 #endif //_Vector_H

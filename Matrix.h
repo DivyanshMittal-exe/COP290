@@ -32,7 +32,7 @@ public:
     Matrix matrix_tanh();
     Matrix max_pooling(int stride);
     Matrix avg_pooling(int stride);
-    void print();
+    void print(string filename);
 
     friend Matrix operator*(Matrix Matrix_1, Matrix Matrix_2);
     friend Matrix operator+(Matrix Matrix_1, Matrix Matrix_2);

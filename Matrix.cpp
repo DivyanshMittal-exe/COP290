@@ -9,35 +9,24 @@ const char * sizeMismatch::what () const throw ()
 
 Matrix::Matrix(string filename)
     {
-        ifstream input_file(filename);
-        int r=0, c=0;
-        float read;
+            ifstream input_file(filename);
+            input_file >> col;
+            input_file >> row;
+            
+            vector<vector<float>> elems(row, vector<float> (col,0));
 
-        while (input_file >> read)
-        {   
-            r++;
-            if(input_file.peek() == '\n'){
-                break;
+            for (int i = 0; i <  col; i++)
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    float val;
+                    input_file >> val;
+                    elems[j][i] = val;
+                }
             }
-        }
-        vector<vector<float>> elem(r);
-
-        input_file.seekg(0);
-        vector< vector<float> >::iterator col_it;
-        col_it = elem.begin();
-        while (input_file >> read)
-        {   
-            col_it->push_back(read);
-            col_it++;
-            if(input_file.peek() == '\n'){
-                col_it = elem.begin();
-                c++;
-            }
-        }
-        row = r;
-        col = c;
-
+            elements = elems;
     }
+
 
 Matrix::Matrix(){
     row = 0;
@@ -88,7 +77,10 @@ Matrix Matrix::matrix_tanh()
             vector<float> col_vec;
             for (int c = 0; c < col; c++)
             {
-                float val = tanh(getElement(r, c));
+                float val = getElement(r, c);
+                float ex = exp(val);
+                float neg_ex = exp(-val);
+                val = (ex-neg_ex)/(ex+neg_ex);
                 col_vec.push_back(val);
             }
             elem.push_back(col_vec);
@@ -158,15 +150,22 @@ Matrix Matrix::avg_pooling(int stride)
     }
 
 
-void Matrix:: print(){
+void Matrix:: print(string filename){
+
+    ofstream output_file(filename);
+    output_file << col << endl;
+    output_file << row << endl;
+
+    
     vector< vector<float> >::iterator r;
     vector<float>::iterator c;
 
-    for (r = elements.begin(); r != elements.end(); r++) {
-        for (c = r->begin(); c != r->end(); c++) {
-            cout << *c << " ";
+    for (int i = 0; i <  col; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            output_file <<  elements[j][i] << endl;
         }
-        cout << endl;
     }
 }
 

@@ -1,0 +1,365 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Fri Jan 28 01:02:41 2022
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+DESKTOP_SESSION = ubuntu
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_SESSION_CLASS = user
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = ubuntu
+# environment
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/jsr/Codes/COP290
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/share/code/code
+# environment
+JOURNAL_STREAM = 8:34297
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# environment
+USERNAME = jsr
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+MANAGERPID = 1198
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+VSCODE_CWD = /home/jsr
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1452,unix/jsr-VirtualBox:/tmp/.ICE-unix/1452
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
+# environment
+INVOCATION_ID = 6dfda8c08d5047128614c2d40bc9438c
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = 
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1985
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/jsr/Codes/COP290
+# default
+.LOADED := 
+# makefile (from 'makefile', line 3)
+pedantic_fLAG = -std=c++17 -pedantic -Wall -Wextra -Werror -Wshadow -Wconversion -Wunreachable-code
+# environment
+SSH_AGENT_PID = 1412
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge:appmenu-gtk-module
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+HOME = /home/jsr
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# environment
+VSCODE_CODE_CACHE_PATH = /home/jsr/.config/Code/CachedData/899d46d82c4c95423fb7e10e68eba52050e30ba3
+# environment
+LOGNAME = jsr
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# environment
+SHLVL = 0
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1261820a-faf8-449d-acb0-c1d60fad937d.sock
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = jsr
+# makefile
+.DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+LANGUAGE = en_IN:en
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-ca55b025-1.63.2-main.sock
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+BREAKPAD_DUMP_LOCATION = /home/jsr/.config/Code/exthost Crash Reports
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# automatic
++F = $(notdir $+)
+# environment
+QT_ACCESSIBILITY = 1
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+LC_ALL = C
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+VSCODE_PID = 1985
+# variable set hash-table stats:
+# Load=101/1024=10%, Rehash=0, Collisions=15/129=12%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2053, inode 945949): 14 files, no impossibilities.
+
+# 14 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+Matrix.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all:
+#  Command line target.
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := all
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  recipe to execute (from 'makefile', line 5):
+	@echo "Compiling"
+	@make run
+
+.PHONY: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+debug: clean run
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 21):
+	sh run.sh
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-01-28 00:43:56.506172561
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+main.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+Matrix.o: Matrix.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 15):
+	@g++ -c Matrix.cpp
+
+Vector.o: Vector.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 18):
+	@g++ -c Vector.cpp
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+run: main.o Matrix.o Vector.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 9):
+	@g++ -g  main.o Matrix.o Vector.o -o yourcode.out
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 24):
+	@rm -f *.o main
+
+main.o: main.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 12):
+	@g++ -c main.cpp
+
+# Not a target:
+Vector.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=14/1024=1%, Rehash=0, Collisions=2/39=5%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 26 / storage = 231 B / avg = 8 B
+# current buf: size = 8162 B / used = 231 B / count = 26 / avg = 8 B
+
+# strcache performance: lookups = 49 / hit rate = 46%
+# hash-table stats:
+# Load=26/8192=0%, Rehash=0, Collisions=1/49=2%
+# Finished Make data base on Fri Jan 28 01:02:41 2022
+
+ 
