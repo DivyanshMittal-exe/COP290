@@ -1,6 +1,5 @@
 .PHONY: clean
 
-pedantic_fLAG = -std=c++17 -pedantic -Wall -Wextra -Werror -Wshadow -Wconversion -Wunreachable-code
 all:
 	@echo "Compiling"
 	@make run
@@ -21,4 +20,5 @@ debug: clean run
 	sh run.sh
 
 clean:
-	@rm -f *.o main
+	@rm -f *.o *.out main
+

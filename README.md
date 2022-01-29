@@ -1,12 +1,12 @@
 # COP290 Subtask 1
 
   - [Available Functions](#Available-Functions)
-    -   [Fully Connected (FC) Layer](#Fully-Connected-Layer)
-    -   [Non-Linear Activations](#Non-Linear-Activations)
-    -   [Subsampling](#Subsampling)
-    -   [Vector of Random Floats To A Vector Of Probabilities](#Vector-of-Random-Floats-To-A-Vector-Of-Probabilities)
-  - [How to input matrix/vector](#How-to-input-matrix/vector)
-  - [How to run the code](#How-to-run-the-code)
+    -   [Fully Connected (FC) Layer](#---fully-connected-fc-layer)
+    -   [Non-Linear Activations](#---non-linear-activations)
+    -   [Subsampling](#---subsampling)
+    -   [Vector of Random Floats To A Vector Of Probabilities](#---vector-of-random-floats-to-a-vector-of-probabilities)
+  - [How to input matrix/vector](#how-to-input-matrixvector)
+  - [How to run the code](#how-to-run-the-code)
 
 ## Available Functions
   

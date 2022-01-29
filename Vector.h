@@ -3,23 +3,22 @@
 #include <bits/stdc++.h>
 #include <exception>
 
-using namespace std;
 
 #ifndef _Vector_H
 #define _Vector_H
 
-class Vector{
-    public:
-        int size;
-        vector<float> elements;
-
+class Vector
+{
+public:
+    int size;
+    std::vector<float> elements;
 
     Vector();
-    Vector(string filename);
+    Vector(std::string filename);
 
     Vector sigmoid();
     Vector softmax();
-    void print(string filename);
+    void print(std::string filename);
 };
 
 #endif //_Vector_H
