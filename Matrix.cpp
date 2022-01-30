@@ -1,50 +1,57 @@
 #include "Matrix.h"
+#include <fstream>
+#include <math.h>
 
-Matrix::Matrix(std::string filename)
+template <typename T>
+
+Matrix<T>::Matrix(const std::string &filename)
 {
     std::ifstream input_file(filename);
     input_file >> col;
     input_file >> row;
 
-    std::vector<std::vector<float>> elems(row, std::vector<float>(col, 0));
+    std::vector<std::vector<T>> elems(row, std::vector<T>(col, 0));
 
     for (int i = 0; i < col; i++)
     {
         for (int j = 0; j < row; j++)
         {
-            float val;
+            T val;
             input_file >> val;
             elems[j][i] = val;
         }
     }
     elements = elems;
 }
+template <typename T>
 
-Matrix::Matrix()
+Matrix<T>::Matrix()
 {
     row = 0;
     col = 0;
 }
+template <typename T>
 
-float Matrix::getElement(int i, int j)
+T Matrix<T>::getElement(int i, int j) const 
 {
-    std::vector<float> row = elements.at(i);
+    std::vector<T> row = elements.at(i);
     return row.at(j);
 }
+template <typename T>
 
-Matrix Matrix::relu()
+Matrix<T> Matrix<T>::relu()
 {
-    Matrix Matrix_return;
-    std::vector<std::vector<float>> elem;
+    Matrix<T> Matrix_return;
+    std::vector<std::vector<T>> elem;
     Matrix_return.row = row;
     Matrix_return.col = col;
 
     for (int r = 0; r < row; r++)
     {
-        std::vector<float> col_vec;
+        std::vector<T> col_vec;
         for (int c = 0; c < col; c++)
         {
-            float val = getElement(r, c);
+            T val = getElement(r, c);
             val = val > 0 ? val : 0;
             col_vec.push_back(val);
         }
@@ -54,22 +61,23 @@ Matrix Matrix::relu()
 
     return Matrix_return;
 }
+template <typename T>
 
-Matrix Matrix::matrix_tanh()
+Matrix<T> Matrix<T>::matrix_tanh()
 {
-    Matrix Matrix_return;
-    std::vector<std::vector<float>> elem;
+    Matrix<T> Matrix_return;
+    std::vector<std::vector<T>> elem;
     Matrix_return.row = row;
     Matrix_return.col = col;
 
     for (int r = 0; r < row; r++)
     {
-        std::vector<float> col_vec;
+        std::vector<T> col_vec;
         for (int c = 0; c < col; c++)
         {
-            float val = getElement(r, c);
-            float ex = exp(val);
-            float neg_ex = exp(-val);
+            T val = getElement(r, c);
+            T ex = exp(val);
+            T neg_ex = exp(-val);
             val = (ex - neg_ex) / (ex + neg_ex);
             col_vec.push_back(val);
         }
@@ -79,11 +87,12 @@ Matrix Matrix::matrix_tanh()
 
     return Matrix_return;
 }
+template <typename T>
 
-Matrix Matrix::max_pooling(int stride)
+Matrix<T> Matrix<T>::max_pooling(int stride)
 {
-    Matrix Matrix_return;
-    std::vector<std::vector<float>> elem;
+    Matrix<T> Matrix_return;
+    std::vector<std::vector<T>> elem;
     Matrix_return.row = row / stride;
     Matrix_return.col = col / stride;
 
@@ -95,10 +104,10 @@ Matrix Matrix::max_pooling(int stride)
 
     for (int r = 0; r < row; r += stride)
     {
-        std::vector<float> col_vec;
+        std::vector<T> col_vec;
         for (int c = 0; c < col; c += stride)
         {
-            float val = getElement(r, c);
+            T val = getElement(r, c);
             for (int i = 0; i < stride; i++)
             {
                 for (int j = 0; j < stride; j++)
@@ -114,11 +123,12 @@ Matrix Matrix::max_pooling(int stride)
 
     return Matrix_return;
 }
+template <typename T>
 
-Matrix Matrix::avg_pooling(int stride)
+Matrix<T> Matrix<T>::avg_pooling(int stride)
 {
-    Matrix Matrix_return;
-    std::vector<std::vector<float>> elem;
+    Matrix<T> Matrix_return;
+    std::vector<std::vector<T>> elem;
     Matrix_return.row = row / stride;
     Matrix_return.col = col / stride;
 
@@ -130,10 +140,10 @@ Matrix Matrix::avg_pooling(int stride)
 
     for (int r = 0; r < row; r += stride)
     {
-        std::vector<float> col_vec;
+        std::vector<T> col_vec;
         for (int c = 0; c < col; c += stride)
         {
-            float val = 0.0f;
+            T val = 0.0f;
             for (int i = 0; i < stride; i++)
             {
                 for (int j = 0; j < stride; j++)
@@ -150,16 +160,17 @@ Matrix Matrix::avg_pooling(int stride)
 
     return Matrix_return;
 }
+template <typename T>
 
-void Matrix::print(std::string filename)
+void Matrix<T>::print(const std::string &filename)
 {
 
     std::ofstream output_file(filename);
     output_file << col << std::endl;
     output_file << row << std::endl;
 
-    std::vector<std::vector<float>>::iterator r;
-    std::vector<float>::iterator c;
+    typename std::vector<std::vector<T>>::iterator r;
+    typename std::vector<T>::iterator c;
 
     for (int i = 0; i < col; i++)
     {
@@ -169,33 +180,34 @@ void Matrix::print(std::string filename)
         }
     }
 }
+template <typename T>
 
-Matrix operator*(Matrix Matrix_1, Matrix Matrix_2)
+Matrix<T> Matrix<T>::operator*(const Matrix<T> &Matrix_2)
 {
-    Matrix Matrix_return;
-    std::vector<std::vector<float>> elem;
+    Matrix<T> Matrix_return;
+    std::vector<std::vector<T>> elem;
     try
     {
-        if (Matrix_1.col != Matrix_2.row)
+        if (col != Matrix_2.row)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
-        Matrix_return.row = Matrix_1.row;
+        Matrix_return.row = row;
         Matrix_return.col = Matrix_2.col;
 
-        for (int r = 0; r < Matrix_1.row; r++)
+        for (int r = 0; r < row; r++)
         {
-            std::vector<float> col;
+            std::vector<T> col_vec;
             for (int c = 0; c < Matrix_2.col; c++)
             {
-                float val = 0.0f;
-                for (int i = 0; i < Matrix_1.col; i++)
+                T val = 0.0f;
+                for (int i = 0; i < col; i++)
                 {
-                    val += Matrix_1.getElement(r, i) * Matrix_2.getElement(i, c);
+                    val += getElement(r, i) * Matrix_2.getElement(i, c);
                 }
-                col.push_back(val);
+                col_vec.push_back(val);
             }
-            elem.push_back(col);
+            elem.push_back(col_vec);
         }
         Matrix_return.elements = elem;
     }
@@ -205,29 +217,30 @@ Matrix operator*(Matrix Matrix_1, Matrix Matrix_2)
     }
     return Matrix_return;
 }
+template <typename T>
 
-Matrix operator+(Matrix Matrix_1, Matrix Matrix_2)
+Matrix<T> Matrix<T>::operator+(const Matrix<T> &Matrix_2)
 {
-    Matrix Matrix_return;
-    std::vector<std::vector<float>> elem;
+    Matrix<T> Matrix_return;
+    std::vector<std::vector<T>> elem;
     try
     {
-        if (Matrix_1.row != Matrix_2.row || Matrix_1.col != Matrix_2.col)
+        if (row != Matrix_2.row || col != Matrix_2.col)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
-        Matrix_return.row = Matrix_1.row;
-        Matrix_return.col = Matrix_1.col;
+        Matrix_return.row = row;
+        Matrix_return.col = col;
 
-        for (int r = 0; r < Matrix_1.row; r++)
+        for (int r = 0; r < row; r++)
         {
-            std::vector<float> col;
-            for (int c = 0; c < Matrix_1.col; c++)
+            std::vector<T> col_vec;
+            for (int c = 0; c < col; c++)
             {
-                float val = Matrix_1.getElement(r, c) + Matrix_2.getElement(r, c);
-                col.push_back(val);
+                T val = getElement(r, c) + Matrix_2.getElement(r, c);
+                col_vec.push_back(val);
             }
-            elem.push_back(col);
+            elem.push_back(col_vec);
         }
         Matrix_return.elements = elem;
     }
@@ -237,3 +250,4 @@ Matrix operator+(Matrix Matrix_1, Matrix Matrix_2)
     }
     return Matrix_return;
 }
+

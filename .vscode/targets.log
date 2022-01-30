@@ -1,13 +1,12 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jan 30 01:43:15 2022
+# Make data base, printed on Mon Jan 31 01:21:25 2022
 
 # Variables
 
@@ -48,7 +47,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:36961
+JOURNAL_STREAM = 8:34318
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
@@ -66,7 +65,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1244
+MANAGERPID = 1194
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -78,7 +77,7 @@ PATH = /home/jsr/.local/bin:/home/jsr/.local/bin:/usr/local/sbin:/usr/local/bin:
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1509,unix/jsr-VirtualBox:/tmp/.ICE-unix/1509
+SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1448,unix/jsr-VirtualBox:/tmp/.ICE-unix/1448
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -88,7 +87,7 @@ VSCODE_LOG_STACK = false
 # environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
 # environment
-INVOCATION_ID = a6ac44d0c9a645639d82db6984c24eb0
+INVOCATION_ID = 8e89f2655058494ab6c37a35ab46a6ba
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -98,7 +97,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2464
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2998
 # automatic
 %F = $(notdir $%)
 # environment
@@ -110,7 +109,7 @@ PWD = /home/jsr/Codes/COP290
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1467
+SSH_AGENT_PID = 1408
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -146,7 +145,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f16c0e1a-cb43-4232-b5ee-5333099ac415.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d946be67-5f3c-4379-a6f2-3e5c41f59ba2.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -210,7 +209,7 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2464
+VSCODE_PID = 2998
 # variable set hash-table stats:
 # Load=100/1024=10%, Rehash=0, Collisions=14/128=11%
 
@@ -220,9 +219,9 @@ VSCODE_PID = 2464
 
 # Directories
 
-# . (device 2053, inode 945949): 13 files, no impossibilities.
+# . (device 2053, inode 945949): 14 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -279,6 +278,7 @@ all:
 debug: clean run
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 20):
 	sh run.sh
@@ -352,12 +352,12 @@ Vector.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 25 / storage = 218 B / avg = 8 B
-# current buf: size = 8162 B / used = 218 B / count = 25 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 26 / storage = 235 B / avg = 9 B
+# current buf: size = 8162 B / used = 235 B / count = 26 / avg = 9 B
 
-# strcache performance: lookups = 48 / hit rate = 47%
+# strcache performance: lookups = 49 / hit rate = 46%
 # hash-table stats:
-# Load=25/8192=0%, Rehash=0, Collisions=1/48=2%
-# Finished Make data base on Sun Jan 30 01:43:15 2022
+# Load=26/8192=0%, Rehash=0, Collisions=1/49=2%
+# Finished Make data base on Mon Jan 31 01:21:25 2022
 
  

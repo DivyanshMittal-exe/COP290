@@ -1,5 +1,6 @@
 # COP290 Subtask 1
 
+
   - [Available Functions](#Available-Functions)
     -   [Fully Connected (FC) Layer](#---fully-connected-fc-layer)
     -   [Non-Linear Activations](#---non-linear-activations)
@@ -7,6 +8,7 @@
     -   [Vector of Random Floats To A Vector Of Probabilities](#---vector-of-random-floats-to-a-vector-of-probabilities)
   - [How to input matrix/vector](#how-to-input-matrixvector)
   - [How to run the code](#how-to-run-the-code)
+  - [Internal Implementation](#internal-implementation)
 
 ## Available Functions
   
@@ -97,3 +99,7 @@ Simply run the make file by `make` command.
 Then write the command you want to run, similarly to the example given above. 
 
 The output would be written in the file **outputvector.txt**/**outputmatrix.txt**
+
+## Internal Implementation
+
+To implement the various functions like Fully Connected (FC) Layer ,Non-Linear Activations, Subsampling and Vector of Random Floats To A Vector Of Probabilities, I have created **C++ template classes** with the names Matrix and Vector. The class have functions, to facilitate the implementation, along with operator overloading of + , * operators. Appropriate errors are also raised wherever needed, eg size mismatch, wrong arguments passed, and many more.

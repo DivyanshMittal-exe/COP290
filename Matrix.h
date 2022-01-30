@@ -1,9 +1,13 @@
 #include <iostream>
-#include <bits/stdc++.h>
 #include <exception>
+#include <vector>
+#include <string>
 
 #ifndef _Matrix_H
 #define _Matrix_H
+
+
+template<typename T>
 
 class Matrix
 {
@@ -11,21 +15,25 @@ class Matrix
 public:
     int row;
     int col;
-    std::vector<std::vector<float>> elements;
+    std::vector<std::vector<T>> elements;
 
     Matrix();
-    Matrix(std::string filename);
+    Matrix(const std::string &filename);
 
-    float getElement(int i, int j);
+    T getElement (int i, int j) const;
 
-    Matrix relu();
-    Matrix matrix_tanh();
-    Matrix max_pooling(int stride);
-    Matrix avg_pooling(int stride);
-    void print(std::string filename);
-
-    friend Matrix operator*(Matrix Matrix_1, Matrix Matrix_2);
-    friend Matrix operator+(Matrix Matrix_1, Matrix Matrix_2);
+    Matrix<T> relu();
+    Matrix<T> matrix_tanh();
+    Matrix<T> max_pooling(int stride);
+    Matrix<T> avg_pooling(int stride);
+    void print(const std::string &filename);
+    Matrix<T> operator*(const Matrix<T> &Matrix_2);
+    Matrix<T> operator+(const Matrix<T> &Matrix_2);
 };
+
+template class Matrix<float>;
+template class Matrix<double>;
+template class Matrix<int>;
+
 
 #endif //_Matrix_H

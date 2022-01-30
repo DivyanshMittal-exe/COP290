@@ -1,6 +1,5 @@
 #include <iostream>
-#include <fstream>
-#include <bits/stdc++.h>
+#include <string.h>
 #include "Matrix.h"
 #include "Vector.h"
 
@@ -9,11 +8,11 @@ void mfc(std::string input_file, std::string weight_matrix, std::string bias_mat
 {
     try
     {
-        Matrix m_in(input_file);
-        Matrix m_wgt(weight_matrix);
-        Matrix m_bias(bias_matrix);
+        Matrix<float> m_in(input_file);
+        Matrix<float> m_wgt(weight_matrix);
+        Matrix<float> m_bias(bias_matrix);
 
-        Matrix m_out = (m_in * m_wgt) + m_bias;
+        Matrix<float> m_out = (m_in * m_wgt) + m_bias;
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -26,8 +25,8 @@ void mrelu(std::string input_file, std::string output_file)
 {
     try
     {
-        Matrix m_in(input_file);
-        Matrix m_out = m_in.relu();
+        Matrix<float> m_in(input_file);
+        Matrix<float> m_out = m_in.relu();
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -39,8 +38,8 @@ void mtanh(std::string input_file, std::string output_file)
 {
     try
     {
-        Matrix m_in(input_file);
-        Matrix m_out = m_in.matrix_tanh();
+        Matrix<float> m_in(input_file);
+        Matrix<float> m_out = m_in.matrix_tanh();
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -52,8 +51,8 @@ void mmaxpool(std::string input_file, std::string Stride, std::string output_fil
 {
     try
     {
-        Matrix m_in(input_file);
-        Matrix m_out = m_in.max_pooling(stoi(Stride));
+        Matrix<float> m_in(input_file);
+        Matrix<float> m_out = m_in.max_pooling(stoi(Stride));
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -66,8 +65,8 @@ void mavgpool(std::string input_file, std::string Stride, std::string output_fil
 
     try
     {
-        Matrix m_in(input_file);
-        Matrix m_out = m_in.avg_pooling(stoi(Stride));
+        Matrix<float> m_in(input_file);
+        Matrix<float> m_out = m_in.avg_pooling(stoi(Stride));
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -80,8 +79,8 @@ void vsoftmax(std::string input_file, std::string output_file)
 
     try
     {
-        Vector m_in(input_file);
-        Vector m_out = m_in.softmax();
+        Vector<float> m_in(input_file);
+        Vector<float> m_out = m_in.softmax();
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -94,8 +93,8 @@ void vsigmoid(std::string input_file, std::string output_file)
 
     try
     {
-        Vector m_in(input_file);
-        Vector m_out = m_in.sigmoid();
+        Vector<float> m_in(input_file);
+        Vector<float> m_out = m_in.sigmoid();
         m_out.print(output_file);
     }
     catch (const std::exception &e)
