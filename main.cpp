@@ -1,9 +1,11 @@
+// Submission by Divyansh Mittal, 2020CS10342
+
 #include <iostream>
 #include <string.h>
 #include "Matrix.h"
 #include "Vector.h"
 
-
+// Implementation of Fully Connected Matrix
 void mfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
 {
     try
@@ -21,6 +23,7 @@ void mfc(std::string input_file, std::string weight_matrix, std::string bias_mat
     }
 }
 
+// Implementation of Relu
 void mrelu(std::string input_file, std::string output_file)
 {
     try
@@ -34,6 +37,9 @@ void mrelu(std::string input_file, std::string output_file)
         throw;
     }
 }
+
+// Implementation of Tanh
+
 void mtanh(std::string input_file, std::string output_file)
 {
     try
@@ -47,12 +53,15 @@ void mtanh(std::string input_file, std::string output_file)
         throw;
     }
 }
+
+// Implementation of Maxpool
+
 void mmaxpool(std::string input_file, std::string Stride, std::string output_file)
 {
     try
     {
         Matrix<float> m_in(input_file);
-        Matrix<float> m_out = m_in.max_pooling(stoi(Stride));
+        Matrix<float> m_out = m_in.max_pooling(atoi(Stride.c_str()));
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -60,13 +69,16 @@ void mmaxpool(std::string input_file, std::string Stride, std::string output_fil
         throw;
     }
 }
+
+// Implementation of Avg Pooling
+
 void mavgpool(std::string input_file, std::string Stride, std::string output_file)
 {
 
     try
     {
         Matrix<float> m_in(input_file);
-        Matrix<float> m_out = m_in.avg_pooling(stoi(Stride));
+        Matrix<float> m_out = m_in.avg_pooling(atoi(Stride.c_str()));
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -74,6 +86,9 @@ void mavgpool(std::string input_file, std::string Stride, std::string output_fil
         throw;
     }
 }
+
+// Implementation of Softmax
+
 void vsoftmax(std::string input_file, std::string output_file)
 {
 
@@ -88,6 +103,8 @@ void vsoftmax(std::string input_file, std::string output_file)
         throw;
     }
 }
+
+// Implementation of sigmoid
 void vsigmoid(std::string input_file, std::string output_file)
 {
 
@@ -112,11 +129,11 @@ int main(int argc, char *argv[])
 
     try
     {
-        /* code */
-
+        // Throw error if less arguments
         if (argc <= 1)
             throw std::runtime_error("Function not given. Please pass a function and input output parameters\n");
 
+        // Throw error if no files specified
         if(argc == 2)
             throw std::runtime_error("Pass input output parameters too and not just name of the function.\n");
 
@@ -143,6 +160,7 @@ int main(int argc, char *argv[])
             }
             else
             {
+                //Error if nothing matchers
 
                 throw std::runtime_error("Enter relu or tanh.\n");
             }
@@ -162,6 +180,7 @@ int main(int argc, char *argv[])
             }
             else
             {
+                //Error if nothing matchers
 
                 throw std::runtime_error("Enter max or average.\n");
             }
@@ -181,15 +200,18 @@ int main(int argc, char *argv[])
             }
             else
             {
-
+                //Error if nothing matchers
                 throw std::runtime_error("Enter softmax or sigmoid.\n");
             }
         }
         else
+        //Error if nothing matchers
         {
             throw std::runtime_error("Invalid command passed.\n");
         }
     }
+
+    //Print the error to cerr
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';

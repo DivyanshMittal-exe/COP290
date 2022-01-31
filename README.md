@@ -30,6 +30,9 @@ weightmatrix.txt | Contains the weight matrix | B x C
 biasmatrix.txt | Contains the bias matrix | A x C
 outputmatrix.txt | Contains the output matrix obtained by taking inner product of input and weight matrix and adding bias matrix to it | A x C
 
+- **Errors raised**: 
+  - Size mismatch for multiplication
+  - Size mismatch for addition
     
 
 ### -  Non-Linear Activations 
@@ -46,7 +49,9 @@ Filename | Description | Size
 ------------ | ------------- | -------------
 inputmatrix.txt | Contains the input matrix | A x B
 outputmatrix.txt | Contains the output matrix obtained by applying relu or tanh function on the input matrix | A x B
-    
+
+   
+
 ### -  Subsampling
 
 - Prints a matrix with subsampling of square input matrices of any size with max pooling and average pooling functions
@@ -64,7 +69,10 @@ inputmatrix.txt | Contains the input matrix | A x B
 stride | Specify the stride for subsampling | n (Positive Integer)
 outputmatrix.txt | Contains the output matrix obtained by subsampling of square input matrices with max pooling or average pooling functions on the input matrix | A x B
     
-
+- **Errors raised**: 
+  - Stride size 0
+  - Matrix not square
+  - Stride does not divide matrix dimension
 
 ### -  Vector of Random Floats To A Vector Of Probabilities
 
@@ -84,6 +92,7 @@ outputvector.txt | Contains vector of probabilities obtained by converting input
     
 <hr>
 
+
 ## How to input matrix/vector
 
 - Store vectors as first line having size of vector and after that single values in each line of the file
@@ -102,4 +111,4 @@ The output would be written in the file **outputvector.txt**/**outputmatrix.txt*
 
 ## Internal Implementation
 
-To implement the various functions like Fully Connected (FC) Layer ,Non-Linear Activations, Subsampling and Vector of Random Floats To A Vector Of Probabilities, I have created **C++ template classes** with the names Matrix and Vector. The class have functions, to facilitate the implementation, along with operator overloading of + , * operators. Appropriate errors are also raised wherever needed, eg size mismatch, wrong arguments passed, and many more.
+To implement the various functions like Fully Connected (FC) Layer ,Non-Linear Activations, Subsampling and Vector of Random Floats To A Vector Of Probabilities, I have created **C++ template classes** with the names Matrix and Vector. The class have functions, to facilitate the implementation, along with operator overloading of + , * operators. Appropriate errors are also raised wherever needed, eg size mismatch, wrong arguments passed, no arguments passed and many more.

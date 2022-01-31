@@ -2,17 +2,23 @@
 #include <fstream>
 #include <math.h>
 
+// Default constructor
 template<typename T>
 Vector<T>::Vector()
 {
     size = 0;
 }
 
-template<typename T>
 
+// Constructor for Vector class with default file passed
+
+template<typename T>
 Vector<T>::Vector(const std::string &filename)
 {
     std::ifstream input_file(filename);
+    if(!input_file.good())
+        throw std::runtime_error("File not found. Empty Vector returned");
+
     input_file >> size;
     std::vector<T> elems(size, 0);
 
@@ -25,8 +31,8 @@ Vector<T>::Vector(const std::string &filename)
     elements = elems;
 }
 
+// Returns a vetor with sigmoid applied on it
 template<typename T>
-
 Vector<T> Vector<T>::sigmoid()
 {
     Vector<T> Vector_return;
@@ -40,8 +46,9 @@ Vector<T> Vector<T>::sigmoid()
     return Vector_return;
 }
 
-template<typename T>
+// Returns a vetor with softmax applied on it
 
+template<typename T>
 Vector<T> Vector<T>::softmax()
 {
     Vector<T> Vector_return;
@@ -61,7 +68,7 @@ Vector<T> Vector<T>::softmax()
     return Vector_return;
 }
 
-
+// Prints a vector to the file given
 template<typename T>
 void Vector<T>::print(const std::string &filename)
 {
