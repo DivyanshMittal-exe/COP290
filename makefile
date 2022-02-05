@@ -5,17 +5,20 @@ all:
 	@echo "Compiling"
 	@make run
 
-run: main.o Matrix.o Vector.o
-	@g++ -O3  main.o Matrix.o Vector.o -o yourcode.out
+run: main.o Plain/Matrix.o Plain/Vector.o pThread/pMatrix.o
+	@g++ -O3  main.o Plain/Matrix.o Plain/Vector.o pThread/pMatrix.o -o yourcode.out
 
 main.o: main.cpp
 	@g++ -c -O3 main.cpp
 
-Matrix.o: Matrix.cpp
-	@g++ -c -O3 Matrix.cpp
+Plain/Matrix.o: Plain/Matrix.cpp
+	@g++ -c -O3 Plain/Matrix.cpp
 
-Vector.o: Vector.cpp
-	@g++ -c -O3 Vector.cpp
+pThread/pMatrix.o: pThread/pMatrix.cpp
+	@g++ -c -O3 -pthreads pThread/pMatrix.cpp
+
+Plain/Vector.o: Plain/Vector.cpp
+	@g++ -c -O3 Plain/Vector.cpp
 
 debug: clean run
 	sh run.sh

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jan 31 19:56:24 2022
+# Make data base, printed on Sat Feb  5 20:23:47 2022
 
 # Variables
 
@@ -47,7 +47,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:34974
+JOURNAL_STREAM = 8:27613
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
@@ -77,7 +77,7 @@ PATH = /home/jsr/.local/bin:/home/jsr/.local/bin:/usr/local/sbin:/usr/local/bin:
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1465,unix/jsr-VirtualBox:/tmp/.ICE-unix/1465
+SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1460,unix/jsr-VirtualBox:/tmp/.ICE-unix/1460
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -87,7 +87,7 @@ VSCODE_LOG_STACK = false
 # environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
 # environment
-INVOCATION_ID = 8b97f1ce4467499abfe611bb1b40e63e
+INVOCATION_ID = 60b82610ff6047989e40c608328c3615
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -97,7 +97,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2926
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3001
 # automatic
 %F = $(notdir $%)
 # environment
@@ -109,7 +109,7 @@ PWD = /home/jsr/Codes/COP290
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1423
+SSH_AGENT_PID = 1415
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -145,7 +145,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-7c2a6b5d-1b27-4955-b05c-2a1ecde7285a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e96a55cd-3e10-4054-9a90-0ff03fb68b9d.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -209,19 +209,20 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2926
+VSCODE_PID = 3001
 # variable set hash-table stats:
 # Load=100/1024=10%, Rehash=0, Collisions=14/128=11%
 
+ 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
 
 # Directories
 
-# . (device 2053, inode 945949): 14 files, no impossibilities.
+# . (device 2053, inode 945949): 11 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -270,6 +271,12 @@ all:
 #  File has not been updated.
 
 # Not a target:
+pMatrix.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -278,16 +285,15 @@ all:
 debug: clean run
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
- 
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 21):
+#  recipe to execute (from 'makefile', line 24):
 	sh run.sh
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-01-31 19:55:31.573681779
+#  Last modified 2022-02-05 20:23:36.760442297
 #  File has been updated.
 #  Successfully updated.
 
@@ -308,7 +314,7 @@ Vector.o: Vector.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 18):
+#  recipe to execute (from 'makefile', line 21):
 	@g++ -c -O3 Vector.cpp
 
 # Not a target:
@@ -317,7 +323,7 @@ Vector.o: Vector.cpp
 #  Modification time never checked.
 #  File has not been updated.
 
-run: main.o Matrix.o Vector.o
+run: main.o Matrix.o Vector.o pMatrix.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -329,8 +335,15 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 24):
+#  recipe to execute (from 'makefile', line 27):
 	@rm -f *.o *.out 
+
+pMatrix.o: pMatrix.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 18):
+	@g++ -c -O3 -pthreads Matrix.cpp
 
 main.o: main.cpp
 #  Implicit rule search has not been done.
@@ -346,19 +359,20 @@ Vector.cpp:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=14/1024=1%, Rehash=0, Collisions=2/42=5%
+# Load=16/1024=2%, Rehash=0, Collisions=7/47=15%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 26 / storage = 235 B / avg = 9 B
-# current buf: size = 8162 B / used = 235 B / count = 26 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 243 B / avg = 9 B
+# current buf: size = 8162 B / used = 243 B / count = 27 / avg = 9 B
 
-# strcache performance: lookups = 52 / hit rate = 50%
+# strcache performance: lookups = 53 / hit rate = 49%
 # hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=1/52=2%
-# Finished Make data base on Mon Jan 31 19:56:24 2022
+ 
+# Load=27/8192=0%, Rehash=0, Collisions=5/53=9%
+# Finished Make data base on Sat Feb  5 20:23:47 2022
 
  

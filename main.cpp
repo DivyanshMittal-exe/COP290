@@ -2,8 +2,9 @@
 
 #include <iostream>
 #include <string.h>
-#include "Matrix.h"
-#include "Vector.h"
+#include "Plain/Matrix.h"
+#include "pThread/pMatrix.h"
+#include "Plain/Vector.h"
 
 // Implementation of Fully Connected Matrix
 void mfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
@@ -15,6 +16,23 @@ void mfc(std::string input_file, std::string weight_matrix, std::string bias_mat
         Matrix<float> m_bias(bias_matrix);
 
         Matrix<float> m_out = (m_in * m_wgt) + m_bias;
+        m_out.print(output_file);
+    }
+    catch (const std::exception &e)
+    {
+        throw;
+    }
+}
+
+void pmfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
+{
+    try
+    {
+        pMatrix<float> m_in(input_file);
+        pMatrix<float> m_wgt(weight_matrix);
+        pMatrix<float> m_bias(bias_matrix);
+
+        pMatrix<float> m_out = (m_in * m_wgt) + m_bias;
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -144,6 +162,14 @@ int main(int argc, char *argv[])
 
             else
                 mfc(argv[2], argv[3], argv[4], argv[5]);
+        }
+        else if (strcmp("pfullyconnected", argv[1]) == 0)
+        {
+            if (argc != 6)
+                throw std::runtime_error("Invalid number of arguments passed.\n");
+
+            else
+                pmfc(argv[2], argv[3], argv[4], argv[5]);
         }
         else if (strcmp("activation", argv[1]) == 0)
         {
