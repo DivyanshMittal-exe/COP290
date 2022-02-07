@@ -1,1 +1,1 @@
-{"buildTargets":["Matrix.o","Vector.o","all","clean","debug","main.o","pMatrix.o","run"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":["Plain/Matrix.o","Plain/Vector.o","all","clean","debug","main.o","pThread/pMatrix.o","run"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

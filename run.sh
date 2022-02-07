@@ -9,6 +9,15 @@ if !(diff -w -q Subtask1TestCasesV1.1/a1a.outputmatrix.txt Subtask1TestCasesV1.1
     fi
 echo "a1a is correct"
 
+./yourcode.out pfullyconnected Subtask1TestCasesV1.1/a1a.inputmatrix.txt Subtask1TestCasesV1.1/a1a.weightmatrix.txt Subtask1TestCasesV1.1/a1a.biasmatrix.txt Subtask1TestCasesV1.1/a1a.test.outputmatrix.txt
+
+if !(diff -w -q Subtask1TestCasesV1.1/a1a.outputmatrix.txt Subtask1TestCasesV1.1/a1a.test.outputmatrix.txt)
+    then
+        echo "pthread a1a is wrong"
+        exit
+    fi
+echo "pthread a1a is correct"
+
 ./yourcode.out activation relu Subtask1TestCasesV1.1/a2a.inputmatrix.txt Subtask1TestCasesV1.1/a2a.test.outputmatrix.txt
 
 if !(diff -w -q Subtask1TestCasesV1.1/a2a.outputmatrix.txt Subtask1TestCasesV1.1/a2a.test.outputmatrix.txt)
@@ -27,7 +36,7 @@ if !(diff -w -q Subtask1TestCasesV1.1/a2b.outputmatrix.txt Subtask1TestCasesV1.1
     fi
 echo "a2b is correct"
 
-./yourcode.out pooling max Subtask1TestCasesV1.1/a3a.inputmatrix.txt abc Subtask1TestCasesV1.1/a3a.test.outputmatrix.txt
+./yourcode.out pooling max Subtask1TestCasesV1.1/a3a.inputmatrix.txt 2 Subtask1TestCasesV1.1/a3a.test.outputmatrix.txt
 
 if !(diff -w -q Subtask1TestCasesV1.1/a3a.outputmatrix.txt Subtask1TestCasesV1.1/a3a.test.outputmatrix.txt)
     then

@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <string.h>
-#include "Plain/Matrix.h"
-#include "pThread/pMatrix.h"
-#include "Plain/Vector.h"
+#include "lib/Plain/Matrix.h"
+#include "lib/pThread/pMatrix.h"
+#include "lib/Plain/Vector.h"
 
 // Implementation of Fully Connected Matrix
 void mfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
@@ -28,11 +28,11 @@ void pmfc(std::string input_file, std::string weight_matrix, std::string bias_ma
 {
     try
     {
-        pMatrix<float> m_in(input_file);
-        pMatrix<float> m_wgt(weight_matrix);
-        pMatrix<float> m_bias(bias_matrix);
+        pMatrix m_in(input_file);
+        pMatrix m_wgt(weight_matrix);
+        pMatrix m_bias(bias_matrix);
 
-        pMatrix<float> m_out = (m_in * m_wgt) + m_bias;
+        pMatrix m_out = (m_in * m_wgt) + m_bias;
         m_out.print(output_file);
     }
     catch (const std::exception &e)

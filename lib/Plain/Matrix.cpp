@@ -109,7 +109,7 @@ Matrix<T> Matrix<T>::max_pooling(int stride)
     if(stride ==0)
         throw std::runtime_error("Incompatible stride error \n");
     
-    if(row == col)
+    if(row != col)
         throw std::runtime_error("Column and row size are not the same \n");
 
     if (col % stride != 0)
@@ -153,7 +153,7 @@ Matrix<T> Matrix<T>::avg_pooling(int stride)
     if(stride ==0)
         throw std::runtime_error("Incompatible stride error \n");
     
-    if(row == col)
+    if(row != col)
         throw std::runtime_error("Column and row size are not the same \n");
 
     if (col % stride != 0)
