@@ -3,33 +3,30 @@
 #include <math.h>
 #include <pthread.h>
 
-// Constructor for pMatrix class with default file passed
-
 struct mul
 {
-    float *upd_loc;
+    // float *upd_loc;
+    float upd;
     std::vector<float> r;
     std::vector<float> c;
 };
 
 struct add
 {
-    std::vector<float> *upd_loc;
-    std::vector<float> l1;
-    std::vector<float> l2;
+    // std::vector<float> *upd_loc;
+    float upd;
+    float l1;
+    float l2;
 };
 
 void *pAdd(void *args)
 {
     struct add *a = (struct add *)args;
-    std::vector<float> l1 = a->l1;
-    std::vector<float> l2 = a->l2;
-    std::vector<float> *u = a->upd_loc;
-    for (int i = 0; i < l1.size(); i++)
-    {
-        (*u)[i] = l2[i] + l1[i];
-    }
-    free(args);
+    float l1 = a->l1;
+    float l2 = a->l2;
+    // std::vector<float> u = a->upd_loc;
+    a->upd = l2 + l1;
+    // free(args);
     pthread_exit(NULL);
 }
 
@@ -43,8 +40,9 @@ void *pMul(void *args)
     {
         val += r[i] * c[i];
     }
-    *(a->upd_loc) = val;
-    free(args);
+    // *(a->upd_loc) = val;
+    a-> upd = val;
+    // free(args);
     pthread_exit(NULL);
 }
 
@@ -148,19 +146,24 @@ pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
+        std::cout << "Less Go";
         pMatrix m2t = Matrix_2.transpose();
+        std::cout << "Transposed";
         pthread_t thread[row][Matrix_2.col];
+        struct mul ss[row][Matrix_2.col];
+
         for (int r = 0; r < row; r++)
         {
             for (int c = 0; c < Matrix_2.col; c++)
             {
 
-                struct mul *a = (mul*)malloc(sizeof(struct mul));
-                ((*a).r) = (elements.at(r));
-                a->c = m2t.elements[c];
-                a->upd_loc = Matrix_return.getElement(r, c);
+                // struct mul *a = (mul*)malloc(sizeof(struct mul));
+                ss[r][c].r =  (elements.at(r));
+                ss[r][c].c =  m2t.elements[c];
+                // ss[r][c].upd_loc = Matrix_return.getElement(r, c);
+                
 
-                if (pthread_create(&thread[r][c], NULL, pMul, (void*)a) != 0)
+                if (pthread_create(&thread[r][c], NULL, pMul, (void*)&ss[r][c]) != 0)
                 {
                     perror("Couldn't make threads");
                 }
@@ -175,6 +178,13 @@ pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
                 {
                     perror("Couldn't join threads");
                 }
+            }
+        }
+        for (int r = 0; r < row; r++)
+        {
+            for (int c = 0; c < Matrix_2.col; c++)
+            {
+                Matrix_return.elements[r][c] = ss[r][c].upd;
             }
         }
     }
@@ -198,25 +208,39 @@ pMatrix pMatrix::operator+(const pMatrix &Matrix_2)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
-        pthread_t thread[row];
-        for (int r = 0; r < row; r++)
-        {
-            struct add *a = (add*)malloc(sizeof(struct add));
-            a->l1 = elements[r];
-            a->l2 = Matrix_2.elements[r];
-            a->upd_loc = &Matrix_return.elements[r];
+        pthread_t thread[row][col];
+        struct add ss[row][col];
 
-            if (pthread_create(&thread[r], NULL, &pMul, a) != 0)
+        for (int r = 0; r < row; r++)
+        {   
+            for (int c = 0; c < col; c++)
             {
-                perror("Couldn't make threads");
+            ss[r][c].l1 = elements[r][c];
+            ss[r][c].l2 = Matrix_2.elements[r][c];
+
+                if (pthread_create(&thread[r][c], NULL, &pAdd,(void*)&ss[r][c]) != 0)
+                {
+                    perror("Couldn't make threads");
+                }
             }
         }
         for (int r = 0; r < row; r++)
         {
 
-            if (pthread_join(thread[r], NULL) != 0)
+            for (int c = 0; c < col; c++)
             {
-                perror("Couldn't join threads");
+
+                if (pthread_join(thread[r][c], NULL) != 0)
+                {
+                    perror("Couldn't join threads");
+                }
+            }
+        }
+        for (int r = 0; r < row; r++)
+        {
+            for (int c = 0; c < col; c++)
+            {
+                Matrix_return.elements[r][c] = ss[r][c].upd;
             }
         }
     }
