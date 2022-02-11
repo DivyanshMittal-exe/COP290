@@ -6,19 +6,19 @@ all:
 	@make run
 
 run: main.o ./lib/Plain/Matrix.o ./lib/Plain/Vector.o ./lib/pThread/pMatrix.o
-	@g++ -O3 -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
+	g++  -g -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
 
 main.o: main.cpp
-	@g++ -c -O3 main.cpp
+	@g++ -c -g main.cpp
 
 Plain/Matrix.o: lib/Plain/Matrix.cpp
-	@g++ -c -O3 ./lib/Plain/Matrix.cpp
+	@g++ -c -g ./lib/Plain/Matrix.cpp
 
 pThread/pMatrix.o: lib/pThread/pMatrix.cpp
-	@g++ -c -O3 -pthread ./lib/pThread/pMatrix.cpp
+	@g++ -c -g -pthread ./lib/pThread/pMatrix.cpp
 
 Plain/Vector.o: lib/Plain/Vector.cpp
-	@g++ -c -O3 ./lib/Plain/Vector.cpp
+	@g++ -c -g ./lib/Plain/Vector.cpp
 
 debug: clean run
 	sh run.sh

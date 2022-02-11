@@ -3,8 +3,11 @@
 #include <iostream>
 #include <string.h>
 #include "lib/Plain/Matrix.h"
-#include "lib/pThread/pMatrix.h"
 #include "lib/Plain/Vector.h"
+#include "lib/pThread/pMatrix.h"
+#include <fstream>
+#include <math.h>
+
 
 // Implementation of Fully Connected Matrix
 void mfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
@@ -28,11 +31,12 @@ void pmfc(std::string input_file, std::string weight_matrix, std::string bias_ma
 {
     try
     {
+        std::cout << "Less Go";
         pMatrix m_in(input_file);
         pMatrix m_wgt(weight_matrix);
         pMatrix m_bias(bias_matrix);
-
-        pMatrix m_out = (m_in * m_wgt) + m_bias;
+        std::cout << "Less Go";
+        pMatrix m_out = (m_in * m_wgt)+ m_bias;
         m_out.print(output_file);
     }
     catch (const std::exception &e)
@@ -144,7 +148,7 @@ int main(int argc, char *argv[])
     // cout << "Welcome!"<<endl;
     // cout << "Submission for COP290-2022 Subtask 1 by Divyansh, 2020CS10342" << endl;
     // cout << "Enter 'h' for help, 'e' to exit"<<endl;
-
+    std::cout << "Less Go";
     try
     {
         // Throw error if less arguments

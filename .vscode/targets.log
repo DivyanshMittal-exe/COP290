@@ -1,16 +1,12 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Feb 11 17:29:38 2022
+# Make data base, printed on Fri Feb 11 20:24:47 2022
 
 # Variables
 
@@ -51,7 +47,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:32614
+JOURNAL_STREAM = 8:35851
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
@@ -69,7 +65,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1208
+MANAGERPID = 1191
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -81,7 +77,7 @@ PATH = /home/jsr/.local/bin:/home/jsr/.local/bin:/usr/local/sbin:/usr/local/bin:
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1463,unix/jsr-VirtualBox:/tmp/.ICE-unix/1463
+SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1453,unix/jsr-VirtualBox:/tmp/.ICE-unix/1453
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -91,7 +87,7 @@ VSCODE_LOG_STACK = false
 # environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
 # environment
-INVOCATION_ID = fee1000d0d6247d28809acc947182bb7
+INVOCATION_ID = ffcd4a92b4ee4472ae1470ce0daf4d6d
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -101,11 +97,10 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1973
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2903
 # automatic
 %F = $(notdir $%)
 # environment
- 
 DISPLAY = :0
 # environment
 VSCODE_PIPE_LOGGING = true
@@ -114,7 +109,7 @@ PWD = /home/jsr/Codes/COP290
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1420
+SSH_AGENT_PID = 1410
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -130,7 +125,7 @@ VSCODE_CODE_CACHE_PATH = /home/jsr/.config/Code/CachedData/899d46d82c4c95423fb7e
 # environment
 LOGNAME = jsr
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # environment
@@ -150,7 +145,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-05c461be-ef9d-4888-aa0c-c2be128b8c70.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-150789f2-05f2-4f9b-acac-c108d796d480.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -214,7 +209,7 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1973
+VSCODE_PID = 2903
 # variable set hash-table stats:
 # Load=100/1024=10%, Rehash=0, Collisions=14/128=11%
 
@@ -224,9 +219,10 @@ VSCODE_PID = 1973
 
 # Directories
 
-# . (device 2053, inode 945949): 21 files, no impossibilities.
+# . (device 2053, inode 945949): 22 files, no impossibilities.
 
-# 21 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
+ 
 
 # Implicit Rules
 
@@ -280,7 +276,7 @@ Plain/Matrix.o: lib/Plain/Matrix.cpp
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 15):
-	@g++ -c -O3 ./lib/Plain/Matrix.cpp
+	@g++ -c -g ./lib/Plain/Matrix.cpp
 
 # Not a target:
 lib/Plain/Matrix.cpp:
@@ -293,7 +289,7 @@ Plain/Vector.o: lib/Plain/Vector.cpp
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 21):
-	@g++ -c -O3 ./lib/Plain/Vector.cpp
+	@g++ -c -g ./lib/Plain/Vector.cpp
 
 # Not a target:
 lib/Plain/Vector.cpp:
@@ -318,7 +314,7 @@ debug: clean run
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-11 17:28:47.610820414
+#  Last modified 2022-02-11 20:24:14.585544731
 #  File has been updated.
 #  Successfully updated.
 
@@ -351,7 +347,7 @@ run: main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 9):
-	@g++ -O3 -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
+	g++  -g -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
 
 # Not a target:
 lib/Plain/Vector.o:
@@ -365,22 +361,21 @@ clean:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 30):
-	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o
+	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 
 
 main.o: main.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 12):
-	@g++ -c -O3 main.cpp
+	@g++ -c -g main.cpp
 
 pThread/pMatrix.o: lib/pThread/pMatrix.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 18):
-	@g++ -c -O3 -pthread ./lib/pThread/pMatrix.cpp
- 
+	@g++ -c -g -pthread ./lib/pThread/pMatrix.cpp
 
 # Not a target:
 lib/pThread/pMatrix.cpp:
@@ -396,12 +391,12 @@ lib/pThread/pMatrix.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 40 / storage = 488 B / avg = 12 B
-# current buf: size = 8162 B / used = 488 B / count = 40 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 41 / storage = 501 B / avg = 12 B
+# current buf: size = 8162 B / used = 501 B / count = 41 / avg = 12 B
 
-# strcache performance: lookups = 67 / hit rate = 40%
+# strcache performance: lookups = 68 / hit rate = 39%
 # hash-table stats:
-# Load=40/8192=0%, Rehash=0, Collisions=1/67=1%
-# Finished Make data base on Fri Feb 11 17:29:38 2022
+# Load=41/8192=1%, Rehash=0, Collisions=1/68=1%
+# Finished Make data base on Fri Feb 11 20:24:47 2022
 
  
