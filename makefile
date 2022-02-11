@@ -23,6 +23,9 @@ Plain/Vector.o: lib/Plain/Vector.cpp
 debug: clean run
 	sh run.sh
 
+pdebug: clean run
+	sh prun.sh
+
 clean:
-	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o
+	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 
 
