@@ -20,6 +20,9 @@ pThread/pMatrix.o: lib/pThread/pMatrix.cpp
 Plain/Vector.o: lib/Plain/Vector.cpp
 	@g++ -c -O3 ./lib/Plain/Vector.cpp
 
+mkl: mklFC.cpp
+	g++ -I /usr/include/mkl mklFC.cpp -o ./file.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+
 debug: clean run
 	sh run.sh
 
