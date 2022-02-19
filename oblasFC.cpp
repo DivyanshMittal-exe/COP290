@@ -3,7 +3,7 @@
 #include <iostream>
 #include <math.h>
 #include <fstream>
-#include <mkl.h>
+#include <cblas.h>
 #include <chrono>
 
 using namespace std;
@@ -61,7 +61,7 @@ void writeMatrix(string filename, float* mat, pair<int,int> dim)
     outfile.close(); //closing file stream
 }
 
-void mklFullyConnected(string input, string weight, string bias, string output){
+void oBFullyConnected(string input, string weight, string bias, string output){
 
     float inputMat[2000];
     pair<int,int> inputDim = readMatrixArr(input, inputMat);
@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
             {
                 throw "Invalid format. Correct format is as follows - ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
             }
-            mklFullyConnected(argv[2], argv[3], argv[4], argv[5]);
+            oBFullyConnected(argv[2], argv[3], argv[4], argv[5]);
         }
     }
     catch (const char *msg)

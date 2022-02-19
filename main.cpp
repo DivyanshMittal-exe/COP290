@@ -7,6 +7,7 @@
 #include "lib/pThread/pMatrix.h"
 #include <fstream>
 #include <math.h>
+#include <chrono>
 
 
 // Implementation of Fully Connected Matrix
@@ -36,7 +37,15 @@ void pmfc(std::string input_file, std::string weight_matrix, std::string bias_ma
         pMatrix m_wgt(weight_matrix);
         pMatrix m_bias(bias_matrix);
         std::cout << "Less Go";
+
+        auto start = std::chrono::steady_clock::now();
+
         pMatrix m_out = (m_in * m_wgt)+ m_bias;
+        
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "Elapsed time in microseconds: "
+            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+            << " µs" << std::endl;
         m_out.print(output_file);
     }
     catch (const std::exception &e)
