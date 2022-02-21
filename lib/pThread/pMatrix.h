@@ -28,7 +28,7 @@ public:
     pMatrix operator*(const pMatrix &Matrix_2);
     pMatrix operator+(const pMatrix &Matrix_2);
 };
-
+    pMatrix fc(const pMatrix &Matrix_1,const pMatrix &Matrix_2,const pMatrix &Matrix_3);
 
 
 #endif //_pMatrix_H

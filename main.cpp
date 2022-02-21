@@ -48,7 +48,7 @@ int pmfc(std::string input_file, std::string weight_matrix, std::string bias_mat
 
         auto start = std::chrono::steady_clock::now();
 
-        pMatrix m_out = (m_in * m_wgt)+ m_bias;
+        pMatrix m_out = fc(m_in,m_wgt,m_bias);
         
         auto end = std::chrono::steady_clock::now();
         std::cout << "Elapsed time in microseconds: "

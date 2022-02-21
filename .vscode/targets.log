@@ -1,12 +1,17 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.2.1
+ 
 # Built for x86_64-pc-linux-gnu
+ 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
+ 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+ 
 # This is free software: you are free to change and redistribute it.
+ 
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Feb 21 18:22:27 2022
+# Make data base, printed on Mon Feb 21 19:11:53 2022
 
 # Variables
 
@@ -42,6 +47,7 @@ GDMSESSION = ubuntu
 XMODIFIERS = @im=ibus
 # makefile
 CURDIR := /home/jsr/Codes/COP290
+ 
 # makefile
 SHELL = /bin/sh
 # environment
@@ -221,9 +227,9 @@ VSCODE_PID = 2029
 
 # Directories
 
-# . (device 2064, inode 658072): 25 files, no impossibilities.
+# . (device 2064, inode 658072): 16 files, no impossibilities.
 
-# 25 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -236,7 +242,7 @@ pdebug: clean run
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 33):
-	sh prun.sh
+	sh debugger.sh pdebug
 
 all:
 #  Command line target.
@@ -277,8 +283,7 @@ Plain/Matrix.o: lib/Plain/Matrix.cpp
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 15):
-	@g++ -c -g ./lib/Plain/Matrix.cpp
- 
+	@g++ -O3 -c -g ./lib/Plain/Matrix.cpp
 
 # Not a target:
 lib/Plain/Matrix.cpp:
@@ -291,7 +296,7 @@ Plain/Vector.o: lib/Plain/Vector.cpp
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 21):
-	@g++ -c -g ./lib/Plain/Vector.cpp
+	@g++ -O3 -c -g ./lib/Plain/Vector.cpp
 
 # Not a target:
 lib/Plain/Vector.cpp:
@@ -311,12 +316,12 @@ debug: clean run
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 30):
-	sh run.sh
+	sh debugger.sh debug
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-21 14:49:17.776161582
+#  Last modified 2022-02-21 18:55:32.64760372
 #  File has been updated.
 #  Successfully updated.
 
@@ -356,7 +361,7 @@ run: main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 9):
-	g++  -g -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
+	g++ -O3 -g -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
 
 # Not a target:
 lib/Plain/Vector.o:
@@ -376,6 +381,7 @@ mkl: mklFC.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'makefile', line 24):
 	g++ -I /usr/include/mkl mklFC.cpp -o ./yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 
@@ -390,14 +396,14 @@ main.o: main.cpp
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 12):
-	@g++ -c -g main.cpp
+	@g++ -O3 -c -g main.cpp
 
 pThread/pMatrix.o: lib/pThread/pMatrix.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 18):
-	@g++ -c -g -pthread ./lib/pThread/pMatrix.cpp
+	@g++ -O3 -c -g -pthread ./lib/pThread/pMatrix.cpp
 
 # Not a target:
 mklFC.cpp:
@@ -419,12 +425,12 @@ lib/pThread/pMatrix.cpp:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 47 / storage = 513 B / avg = 10 B
-# current buf: size = 8162 B / used = 513 B / count = 47 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 38 / storage = 399 B / avg = 10 B
+# current buf: size = 8162 B / used = 399 B / count = 38 / avg = 10 B
 
-# strcache performance: lookups = 77 / hit rate = 38%
+# strcache performance: lookups = 68 / hit rate = 44%
 # hash-table stats:
-# Load=47/8192=1%, Rehash=0, Collisions=1/77=1%
-# Finished Make data base on Mon Feb 21 18:22:27 2022
+# Load=38/8192=0%, Rehash=0, Collisions=1/68=1%
+# Finished Make data base on Mon Feb 21 19:11:53 2022
 
  
