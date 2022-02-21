@@ -3,6 +3,8 @@
 #include <math.h>
 #include <pthread.h>
 
+
+
 struct mul
 {
     // float *upd_loc;
@@ -14,6 +16,8 @@ struct mul
     
 };
 
+
+
 struct add
 {
     std::vector<std::vector<float>> *mult; 
@@ -21,6 +25,8 @@ struct add
     const std::vector<std::vector<float>> *m2;
     int i,j;
 };
+
+
 
 void *pAdd(void *args)
 {
@@ -30,19 +36,16 @@ void *pAdd(void *args)
     const std::vector<std::vector<float>>  &m2 = *(a-> m2);
     int i = a-> i;
     int j = a-> j;
-    std::vector< std::vector<float> >::const_iterator row1;
-    std::vector< std::vector<float> >::const_iterator row2;
-    std::vector<float>::const_iterator  col1;
-    std::vector<float>::const_iterator  col2;
+
 
     for (int row_i = i; row_i < j;row_i++) {
         
-            row1 = m1.cbegin() + row_i;
-            row2 = m2.cbegin() + row_i;
+            auto row1 = m1.cbegin() + row_i;
+            auto row2 = m2.cbegin() + row_i;
             for (int k = 0; k < row1->size(); k++)
             {
-                col1 = row1->cbegin() + k;
-                col2 = row2->cbegin() + k;
+                auto col1 = row1->cbegin() + k;
+                auto col2 = row2->cbegin() + k;
                 mult[row_i][k] = (*col1)+ (*col2);
             }
     }
@@ -50,6 +53,8 @@ void *pAdd(void *args)
 
     pthread_exit(NULL);
 }
+
+
 
 void *pMul(void *args)
 {
@@ -62,20 +67,16 @@ void *pMul(void *args)
     int m2i = a-> m2i;
     int m2j = a-> m2j;
 
-    std::vector< std::vector<float> >::const_iterator row1;
-    std::vector< std::vector<float> >::const_iterator row2;
-    std::vector<float>::const_iterator  col1;
-    std::vector<float>::const_iterator  col2;
 
     for (int i = m1i; i < m1j;i++) {
         for (int j = m2i; j < m2j;j++) {
-            row1 = m1.cbegin() + i;
-            row2 = m2t.cbegin() + j;
+            auto row1 = m1.cbegin() + i;
+            auto row2 = m2t.cbegin() + j;
             float sum = 0;
             for (int k = 0; k < row1->size(); k++)
             {
-                col1 = row1->cbegin() + k;
-                col2 = row2->cbegin() + k;
+                auto col1 = row1->cbegin() + k;
+                auto col2 = row2->cbegin() + k;
                 sum += (*col1)*(*col2);
             }
             mult[i][j] = sum;
@@ -86,103 +87,34 @@ void *pMul(void *args)
 }
 
 
-pMatrix::pMatrix(const std::string &filename)
-{
-    std::ifstream input_file(filename);
-
-    if (!input_file.good())
-        throw std::runtime_error("File not found. Empty matrix returned");
-
-    input_file >> col;
-    input_file >> row;
-
-    std::vector<std::vector<float>> elems(row, std::vector<float>(col, 0));
-
-    for (int i = 0; i < col; i++)
-    {
-        for (int j = 0; j < row; j++)
-        {
-            float val;
-            input_file >> val;
-            elems[j][i] = val;
-        }
-    }
-    elements = elems;
-}
-
-// Constructor for pMatrix class with no argument to initialise as 0 size matrix
-
-
-pMatrix::pMatrix()
-{
-    row = 0;
-    col = 0;
-}
-
-
-pMatrix::pMatrix(int r, int c)
-{
-    row = r;
-    col = c;
-    std::vector<std::vector<float>> elems(row, std::vector<float>(col, 0));
-    elements = elems;
-}
-
-
-
-// Returns element (i,j)
-float *pMatrix::getElement(int i, int j) const
-{
-    std::vector<float> row = elements.at(i);
-    return &row.at(j);
-}
-
-// Funtion to print a matrix to the given stream
-
-
-void pMatrix::print(const std::string &filename)
-{
-
-    std::ofstream output_file(filename);
-    output_file << col << std::endl;
-    output_file << row << std::endl;
-
-    typename std::vector<std::vector<float>>::iterator r;
-    typename std::vector<float>::iterator c;
-
-    for (int i = 0; i < col; i++)
-    {
-        for (int j = 0; j < row; j++)
-        {
-            output_file << elements[j][i] << std::endl;
-        }
-    }
-}
-
 
 pMatrix pMatrix::transpose() const
 {
-    pMatrix Matrix_return(col, row);
-    for (int r = 0; r < row; r++)
+    
+    pMatrix Matrix_return(Matrix<float>::col, Matrix<float>::row);
+    for (int r = 0; r < Matrix<float>::row; r++)
     {
-        for (int c = 0; c < col; c++)
+        for (int c = 0; c < Matrix<float>::col; c++)
         {
-            Matrix_return.elements[c][r] = elements[r][c];
+            Matrix_return.elements[c][r] = Matrix<float>::elements[r][c];
         }
     }
     return Matrix_return;
 }
+
+
 // Funtion to overload the * operation for matrix. Multiply 2 matrices of size axb and bxc to get back a axc size matrix
 //  Raises error if size mismatch
 
 
 pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
-{
-    pMatrix Matrix_return(row, Matrix_2.col);
+{   
+    
+    pMatrix Matrix_return(Matrix<float>::row, Matrix_2.col);
     std::vector<std::vector<float>> elem;
     try
     {
-        if (col != Matrix_2.row)
+        if (Matrix<float>::col != Matrix_2.row)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
@@ -190,36 +122,36 @@ pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
         pthread_t thread[4];
         struct mul ss[4];
 
-        std::vector<std::vector<float>> res(row, std::vector<float>(Matrix_2.col, 0));
+        std::vector<std::vector<float>> res(Matrix<float>::row, std::vector<float>(Matrix_2.col, 0));
 
             
         for (int i = 0; i < 4; i++)
         {
             ss[i].mult = &res;
-            ss[i].m1 = &elements;
+            ss[i].m1 = &(Matrix<float>::elements);
             ss[i].m2t = &m2t.elements;
             
         }
 
         ss[0].m1i = 0;
-        ss[0].m1j = row/2;
+        ss[0].m1j = Matrix<float>::row/2;
         ss[0].m2i = 0;
-        ss[0].m2j = m2t.row/2;
+        ss[0].m2j = m2t.Matrix<float>::row/2;
 
         ss[1].m1i = 0;
-        ss[1].m1j = row/2;
-        ss[1].m2i = m2t.row/2;
-        ss[1].m2j = m2t.row;
+        ss[1].m1j = Matrix<float>::row/2;
+        ss[1].m2i = m2t.Matrix<float>::row/2;
+        ss[1].m2j = m2t.Matrix<float>::row;
 
-        ss[2].m1i = row/2;
-        ss[2].m1j = row;
+        ss[2].m1i = Matrix<float>::row/2;
+        ss[2].m1j = Matrix<float>::row;
         ss[2].m2i = 0;
-        ss[2].m2j = m2t.row/2;
+        ss[2].m2j = m2t.Matrix<float>::row/2;
 
-        ss[3].m1i = row/2;
-        ss[3].m1j = row;
-        ss[3].m2i = m2t.row/2;
-        ss[3].m2j = m2t.row;
+        ss[3].m1i = Matrix<float>::row/2;
+        ss[3].m1j = Matrix<float>::row;
+        ss[3].m2i = m2t.Matrix<float>::row/2;
+        ss[3].m2j = m2t.Matrix<float>::row;
 
 
         for (int i = 0; i < 4; i++)
@@ -249,40 +181,44 @@ pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
 
 // Funtion to overload the + operation for matrix. Multiply 2 matrices of size axb and axb to get back a axb size matrix
 //  Raises error if size mismatch
+
+
 pMatrix pMatrix::operator+(const pMatrix &Matrix_2)
 {
-    pMatrix Matrix_return(row, col);
+    
+    
+    pMatrix Matrix_return(Matrix<float>::row, Matrix<float>::col);
     std::vector<std::vector<float>> elem;
     try
     {
-        if (row != Matrix_2.row || col != Matrix_2.col)
+        if (Matrix<float>::row != Matrix_2.row || Matrix<float>::col != Matrix_2.col)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
         pthread_t thread[4];
         struct add ss[4];
 
-        std::vector<std::vector<float>> res(row, std::vector<float>(col, 0));
+        std::vector<std::vector<float>> res(Matrix<float>::row, std::vector<float>(Matrix<float>::col, 0));
 
             
         for (int i = 0; i < 4; i++)
         {
             ss[i].mult = &res;
-            ss[i].m1 = &elements;
+            ss[i].m1 = &(Matrix<float>::elements);
             ss[i].m2 = &Matrix_2.elements;
         }
 
         ss[0].i = 0;
-        ss[0].j = row/4;
+        ss[0].j = Matrix<float>::row/4;
 
-        ss[1].i = row/4;
-        ss[1].j = row/2;
+        ss[1].i = Matrix<float>::row/4;
+        ss[1].j = Matrix<float>::row/2;
        
-        ss[2].i = row/2;
-        ss[2].j = 3*row/4;
+        ss[2].i = Matrix<float>::row/2;
+        ss[2].j = 3*Matrix<float>::row/4;
 
-        ss[3].i = 3*row/4;
-        ss[3].j = row;
+        ss[3].i = 3*Matrix<float>::row/4;
+        ss[3].j = Matrix<float>::row;
        
 
 
