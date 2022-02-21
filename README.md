@@ -6,6 +6,8 @@
     -   [Non-Linear Activations](#---non-linear-activations)
     -   [Subsampling](#---subsampling)
     -   [Vector of Random Floats To A Vector Of Probabilities](#---vector-of-random-floats-to-a-vector-of-probabilities)
+  
+  - [Data fully connected](#data-fully-connected)
   - [How to input matrix/vector](#how-to-input-matrixvector)
   - [How to run the code](#how-to-run-the-code)
   - [Internal Implementation](#internal-implementation)
@@ -114,6 +116,23 @@ inputvector.txt | Contains the input matrix | A x 1
 outputvector.txt | Contains vector of probabilities obtained by converting input vector with softmax or sigmoid functions | A x 1
     
 <hr>
+
+# Data fully connected
+
+Implementation | Size | Average | Stand Dev
+------------ | ------------- | ------------- | -------------
+Plain | 100 x 100 | 9520.78 | 658.29
+Plain | 200 x 200 | 63370.35 | 2045.94
+Plain | 300 x 300 | 215206.17 | 10489.38
+PThread | 100 x 100 | 8089.14 | 895.47
+PThread | 200 x 200 | 54718.96 | 2305.83
+PThread | 300 x 300 | 192907.44 | 8574.35
+MKL | 100 x 100 | 375.11 | 2546.68
+MKL | 200 x 200 | 372.44 | 2092.87
+MKL | 300 x 300 | 549.07 | 1989.19
+OBlas | 100 x 100 | 1603.51 |4911.01
+OBlas | 200 x 200 | 221.77 |535.98
+OBlas | 300 x 300 | 519.94 |1041.76
 
 
 ## How to input matrix/vector
