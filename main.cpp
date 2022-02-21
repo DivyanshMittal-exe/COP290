@@ -19,7 +19,15 @@ void mfc(std::string input_file, std::string weight_matrix, std::string bias_mat
         Matrix<float> m_wgt(weight_matrix);
         Matrix<float> m_bias(bias_matrix);
 
+        auto start = std::chrono::steady_clock::now();
+
         Matrix<float> m_out = (m_in * m_wgt) + m_bias;
+        
+        auto end = std::chrono::steady_clock::now();
+        std::cout << "Elapsed time in microseconds: "
+            << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
+            << " µs" << std::endl;
+
         m_out.print(output_file);
     }
     catch (const std::exception &e)
