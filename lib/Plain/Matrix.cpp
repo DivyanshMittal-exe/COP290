@@ -111,9 +111,7 @@ Matrix<T> Matrix<T>::matrix_tanh()
         {
             T val = elements[r][ c];
             //Implementation of tanh with exp
-            T ex = exp(val);
-            T neg_ex = exp(-val);
-            val = (ex - neg_ex) / (ex + neg_ex);
+            val = (exp(2 * val) - 1) / (exp(2 * val) + 1);
             col_vec.push_back(val);
         }
         elem.push_back(col_vec);
