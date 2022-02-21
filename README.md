@@ -117,7 +117,7 @@ outputvector.txt | Contains vector of probabilities obtained by converting input
 
 ## Data fully connected
 
-Implementation | Size | Average | Stand Dev
+Implementation | Size | Average(in μs) | Stand Dev(in μs)
 ------------ | ------------- | ------------- | -------------
 Plain | 100 x 100 | 9083.77 | 1057.02
 Plain | 200 x 200 | 63055.11 | 1912.02
