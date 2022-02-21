@@ -11,7 +11,7 @@
 
 
 // Implementation of Fully Connected Matrix
-void mfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
+int mfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
 {
     try
     {
@@ -22,13 +22,15 @@ void mfc(std::string input_file, std::string weight_matrix, std::string bias_mat
         auto start = std::chrono::steady_clock::now();
 
         Matrix<float> m_out = (m_in * m_wgt) + m_bias;
-        
+
         auto end = std::chrono::steady_clock::now();
         std::cout << "Elapsed time in microseconds: "
             << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
             << " µs" << std::endl;
 
         m_out.print(output_file);
+
+        return (int)std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     }
     catch (const std::exception &e)
     {
@@ -36,7 +38,7 @@ void mfc(std::string input_file, std::string weight_matrix, std::string bias_mat
     }
 }
 
-void pmfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
+int pmfc(std::string input_file, std::string weight_matrix, std::string bias_matrix, std::string output_file)
 {
     try
     {
@@ -53,11 +55,48 @@ void pmfc(std::string input_file, std::string weight_matrix, std::string bias_ma
             << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
             << " µs" << std::endl;
         m_out.print(output_file);
+
+        return (int)std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     }
     catch (const std::exception &e)
     {
         throw;
     }
+}
+
+void timer()
+{
+    std::string input = "a100inputmatrix.txt";
+    std::string weight = "a100weightmatrix.txt";
+    std::string bias = "a100biasmatrix.txt";
+    std::string output = "a100outmatrix.txt";
+
+    std::ofstream outfile;
+    std::string filename = "data/plain.dat";
+    outfile.open(filename, std::fstream::out); //opening file stream
+    if (!outfile)
+    {
+        throw "Error, Data file couldn't be opened/created";
+    }
+    
+    for(int i = 0; i < 100; i++){
+        int elapsed_time  = mfc(input, weight, bias, output);
+        outfile << elapsed_time << std::endl;
+    }
+    outfile.close();
+
+    filename = "data/pthread.dat";
+    outfile.open(filename, std::fstream::out); //opening file stream
+    if (!outfile)
+    {
+        throw "Error, Data file couldn't be opened/created";
+    }
+    
+    for(int i = 0; i < 100; i++){
+        int elapsed_time  = pmfc(input, weight, bias, output);
+        outfile << elapsed_time << std::endl;
+    }
+    outfile.close();
 }
 
 // Implementation of Relu
@@ -170,7 +209,7 @@ int main(int argc, char *argv[])
             throw std::runtime_error("Function not given. Please pass a function and input output parameters\n");
 
         // Throw error if no files specified
-        if(argc == 2)
+        if(argc == 2 && strcmp("timer", argv[1]) != 0)
             throw std::runtime_error("Pass input output parameters too and not just name of the function.\n");
 
         if (strcmp("fullyconnected", argv[1]) == 0)
@@ -247,6 +286,10 @@ int main(int argc, char *argv[])
                 //Error if nothing matchers
                 throw std::runtime_error("Enter softmax or sigmoid.\n");
             }
+        }
+        else if (strcmp("timer", argv[1]) == 0 && argc == 2)
+        {
+            timer();
         }
         else
         //Error if nothing matchers
