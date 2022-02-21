@@ -32,6 +32,9 @@ debug: clean run
 pdebug: clean run
 	sh debugger.sh pdebug
 
+plot: plot.sh
+	gnuplot plot.sh
+
 clean:
 	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 
 
