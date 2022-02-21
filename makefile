@@ -27,10 +27,10 @@ oblas: oblasFC.cpp
 	g++ -I/opt/OpenBLAS/include -o yourcode.out oblasFC.cpp  -L/opt/OpenBLAS/lib -lopenblas -lpthread -lgfortran
 
 debug: clean run
-	sh run.sh
+	sh debugger.sh debug
 
 pdebug: clean run
-	sh prun.sh
+	sh debugger.sh pdebug
 
 clean:
 	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 

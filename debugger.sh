@@ -1,3 +1,6 @@
+if [ $1 = "debug" ];
+then
+
 rm -rf Subtask1TestCasesV1.1/a1a.test.outputmatrix.txt Subtask1TestCasesV1.1/a2a.test.outputmatrix.txt Subtask1TestCasesV1.1/a2b.test.outputmatrix.txt Subtask1TestCasesV1.1/a3a.test.outputmatrix.txt Subtask1TestCasesV1.1/a3b.test.outputmatrix.txt Subtask1TestCasesV1.1/a4a.test.outputvector.txt Subtask1TestCasesV1.1/a4b.test.outputvector.txt
 
 ./yourcode.out fullyconnected Subtask1TestCasesV1.1/a1a.inputmatrix.txt Subtask1TestCasesV1.1/a1a.weightmatrix.txt Subtask1TestCasesV1.1/a1a.biasmatrix.txt Subtask1TestCasesV1.1/a1a.test.outputmatrix.txt
@@ -72,3 +75,11 @@ if !(diff -w -q Subtask1TestCasesV1.1/a4b.outputvector.txt Subtask1TestCasesV1.1
         exit
     fi
 echo "a4b is correct"
+
+else 
+
+./yourcode.out pfullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
+
+python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
+
+fi

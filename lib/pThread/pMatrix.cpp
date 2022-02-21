@@ -119,55 +119,53 @@ pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
         pMatrix m2t = Matrix_2.transpose();
-        pthread_t thread[4];
-        struct mul ss[4];
+
+        const int thread_c = 3;
+
+        pthread_t thread[thread_c][thread_c];
+        struct mul ss[thread_c][thread_c];
 
         std::vector<std::vector<float>> res(Matrix<float>::row, std::vector<float>(Matrix_2.col, 0));
 
-            
-        for (int i = 0; i < 4; i++)
+
+        for (int i = 0; i < thread_c; i++)
         {
-            ss[i].mult = &res;
-            ss[i].m1 = &(Matrix<float>::elements);
-            ss[i].m2t = &m2t.elements;
+            for (int j = 0; j < thread_c; j++)
+            {
+                ss[i][j].mult = &res;
+                ss[i][j].m1 = &(Matrix<float>::elements);
+                ss[i][j].m2t = &m2t.elements;
+
+                ss[i][j].m1i = i*(Matrix<float>::row/thread_c);
+                ss[i][j].m1j = ((i+1)*Matrix<float>::row)/thread_c;
+                ss[i][j].m2i = j*(m2t.row/thread_c);
+                ss[i][j].m2j = ((j+1)*m2t.row)/thread_c;
+            }
             
         }
-
-        ss[0].m1i = 0;
-        ss[0].m1j = Matrix<float>::row/2;
-        ss[0].m2i = 0;
-        ss[0].m2j = m2t.Matrix<float>::row/2;
-
-        ss[1].m1i = 0;
-        ss[1].m1j = Matrix<float>::row/2;
-        ss[1].m2i = m2t.Matrix<float>::row/2;
-        ss[1].m2j = m2t.Matrix<float>::row;
-
-        ss[2].m1i = Matrix<float>::row/2;
-        ss[2].m1j = Matrix<float>::row;
-        ss[2].m2i = 0;
-        ss[2].m2j = m2t.Matrix<float>::row/2;
-
-        ss[3].m1i = Matrix<float>::row/2;
-        ss[3].m1j = Matrix<float>::row;
-        ss[3].m2i = m2t.Matrix<float>::row/2;
-        ss[3].m2j = m2t.Matrix<float>::row;
+        
 
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < thread_c; i++)
         {
-            if (pthread_create(&thread[i], NULL, pMul, (void*)&ss[i]) != 0)
+            for (int j = 0; j < thread_c; j++)
             {
-                perror("Couldn't make threads");
+                if (pthread_create(&thread[i][j], NULL, pMul, (void*)&ss[i][j]) != 0)
+                {
+                    perror("Couldn't make threads");
+                }
             }
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < thread_c; i++)
         {
-            if (pthread_join(thread[i], NULL) != 0)
+            for (int j = 0; j < thread_c; j++)
+            {
+                if (pthread_join(thread[i][j], NULL) != 0)
                 {
                     perror("Couldn't join threads");
                 }
+            }
         }
         
         Matrix_return.elements = res;
@@ -195,34 +193,30 @@ pMatrix pMatrix::operator+(const pMatrix &Matrix_2)
         {
             throw std::runtime_error("Size Mismatch, the provided matrices are not compatible to perform this funtion \n");
         }
-        pthread_t thread[4];
-        struct add ss[4];
+
+        const int thread_c = 8;
+
+
+        pthread_t thread[thread_c];
+        struct add ss[thread_c];
 
         std::vector<std::vector<float>> res(Matrix<float>::row, std::vector<float>(Matrix<float>::col, 0));
 
             
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < thread_c; i++)
         {
             ss[i].mult = &res;
             ss[i].m1 = &(Matrix<float>::elements);
             ss[i].m2 = &Matrix_2.elements;
+            ss[i].i = i*Matrix_2.row/thread_c;
+            ss[i].j = ((i+1)*Matrix<float>::row)/thread_c;
         }
 
-        ss[0].i = 0;
-        ss[0].j = Matrix<float>::row/4;
 
-        ss[1].i = Matrix<float>::row/4;
-        ss[1].j = Matrix<float>::row/2;
-       
-        ss[2].i = Matrix<float>::row/2;
-        ss[2].j = 3*Matrix<float>::row/4;
-
-        ss[3].i = 3*Matrix<float>::row/4;
-        ss[3].j = Matrix<float>::row;
        
 
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < thread_c; i++)
         {
             if (pthread_create(&thread[i], NULL, pAdd, (void*)&ss[i]) != 0)
             {
@@ -230,7 +224,7 @@ pMatrix pMatrix::operator+(const pMatrix &Matrix_2)
             }
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < thread_c; i++)
         {
             if (pthread_join(thread[i], NULL) != 0)
                 {

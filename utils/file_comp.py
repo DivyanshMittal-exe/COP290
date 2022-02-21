@@ -8,6 +8,7 @@ if __name__=="__main__":
 
     for w1,w2 in zip(l1,l2):
         if abs(float(w1) - float(w2)) > 1e-4:
+            print(float(w1) , float(w2))
             print("Files differ")
             break
     else:
