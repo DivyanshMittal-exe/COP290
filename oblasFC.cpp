@@ -123,13 +123,13 @@ int main(int argc, char *argv[])
             // No arguments given
             throw "Invalid format. No arguments given. Check out README for valid format.";
         }
-        else if (string(argv[1]) == "oBfullyconnected")
+        else if (string(argv[1]) == "oblas" && string(argv[2]) == "fullyconnected")
         {
-            if (argc != 6)
+            if (argc != 6 || argc != 7)
             {
-                throw "Invalid format. Correct format is as follows - ./yourcode.out oBfullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
+                throw "Invalid format. Correct format is as follows - ./yourcode.out oblas fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
             }
-            oBFullyConnected(argv[2], argv[3], argv[4], argv[5]);
+            oBFullyConnected(argv[3], argv[4], argv[5], argv[6]);
         }else if (string(argv[1]) == "timer" && argc == 2) {
             timer();
         }else {

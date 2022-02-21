@@ -220,6 +220,13 @@ int main(int argc, char *argv[])
 
             else
                 mfc(argv[2], argv[3], argv[4], argv[5]);
+        }else if (strcmp("pthread", argv[1]) == 0 and strcmp("fullyconnected", argv[2]) == 0)
+        {
+            if (argc != 7)
+                throw std::runtime_error("Invalid number of arguments passed.\n");
+
+            else
+                mfc(argv[3], argv[4], argv[5], argv[6]);
         }
         else if (strcmp("pfullyconnected", argv[1]) == 0)
         {
