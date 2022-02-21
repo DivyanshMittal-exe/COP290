@@ -6,18 +6,18 @@
 #include <cblas.h>
 #include <chrono>
 
-using namespace std;
+
 
 //I am storing a matrix as a array of doubles (Column Major format)
 //For a matrix I am storing the dimension in a pair (col,row)
 
-pair<int, int> readMatrixArr(string filename, float* mat)
+std::pair<int, int> readMatrixArr(std::string filename, float* mat)
 {
     int A, B; // AxB matrix
 
     //Handling file handling exceptions
 
-    ifstream infile;
+    std::ifstream infile;
     infile.open(filename); //opening file stream
     if (!infile)
     {
@@ -33,42 +33,42 @@ pair<int, int> readMatrixArr(string filename, float* mat)
         infile >> mat[i];
     }
     infile.close(); //closing file stream
-    pair<int, int> p(A, B);
+    std::pair<int, int> p(A, B);
     // p.first = A;
     // p.second = B;
     return p;
 }
 
-void writeMatrix(string filename, float* mat, pair<int,int> dim)
+void writeMatrix(std::string filename, float* mat, std::pair<int,int> dim)
 {
     //Handling file handling exceptions
 
-    ofstream outfile;
-    outfile.open(filename, fstream::out); //opening file stream
+    std::ofstream outfile;
+    outfile.open(filename, std::fstream::out); //opening file stream
     if (!outfile)
     {
         throw "Error, Output file couldn't be opened/created";
     }
     int A = dim.first;
     int B = dim.second;
-    outfile << dim.first << endl;
-    outfile << dim.second << endl;
+    outfile << dim.first << std::endl;
+    outfile << dim.second << std::endl;
 
     for (int i = 0; i < A*B; i++)
     {
-        outfile << (float)mat[i] << endl;
+        outfile << (float)mat[i] << std::endl;
     }
     outfile.close(); //closing file stream
 }
 
-int oBFullyConnected(string input, string weight, string bias, string output){
+int oBFullyConnected(std::string input, std::string weight, string bias, std::string output){
 
     float inputMat[100000];
-    pair<int,int> inputDim = readMatrixArr(input, inputMat);
+    std::pair<int,int> inputDim = readMatrixArr(input, inputMat);
     float weightMat[100000];
-    pair<int,int> weightDim = readMatrixArr(weight, weightMat);
+    std::pair<int,int> weightDim = readMatrixArr(weight, weightMat);
     float biasMat[100000];
-    pair<int,int> biasDim = readMatrixArr(bias, biasMat);
+    std::pair<int,int> biasDim = readMatrixArr(bias, biasMat);
 
 
     if (inputDim.first != weightDim.second || inputDim.second != biasDim.second || weightDim.first != biasDim.first)
@@ -78,9 +78,9 @@ int oBFullyConnected(string input, string weight, string bias, string output){
     auto start = chrono::steady_clock::now();
     cblas_sgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, inputDim.second, weightDim.first, inputDim.first, 1.0,  inputMat, inputDim.second, weightMat, weightDim.second, 1.0, biasMat, biasDim.second);
     auto end = chrono::steady_clock::now();
-    cout << "Elapsed time in microseconds: "
+    std::cout << "Elapsed time in microseconds: "
         << chrono::duration_cast<chrono::microseconds>(end - start).count()
-        << " µs" << endl;
+        << " µs" << std::endl;
 
     writeMatrix(output, biasMat, biasDim);
 
@@ -137,14 +137,9 @@ int main(int argc, char *argv[])
             throw "Invalid Input. Check out README for valid parameter format.";
         }
     }
-    catch (const char *msg)
+    catch (const std::exception &e)
     {
-        //Printing errors in console
-        cerr << msg << endl;
-    }
-    catch (exception e)
-    {
-        cout << e.what() << endl;
+        std::cerr << e.what() << '\n';
     }
 
     return 0;
