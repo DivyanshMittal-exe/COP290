@@ -26,28 +26,23 @@
     make
     ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
     ```
-  1. pThreads 
+  2. pThreads 
     ```
     make
     ./yourcode.out pthread fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
     ```
-  1. MKL 
+  3. MKL 
     ```
     make mkl
     ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
     ```
-  1. Openblas 
+  4. Openblas 
     ```
     make oblas
     ./yourcode.out oblas fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
     ```
 
 
-Example: 
-
-```
-./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
-```
 Filename | Description | Size
 ------------ | ------------- | -------------
 inputmatrix.txt | Contains the input matrix | A x C
@@ -145,7 +140,7 @@ OBlas | 300 x 300 | 519.94 |1041.76
 
 ## How to run the code
 
-Simply run the make file by `make` command.
+Simply run the make file by `make` command for plain and pthreads implementation, `make mkl` command for mkl or `make oblas` for oblas implementation.
 
 Then write the command you want to run, similarly to the example given above. 
 
@@ -154,3 +149,7 @@ The output would be written in the file **outputvector.txt**/**outputmatrix.txt*
 ## Internal Implementation
 
 To implement the various functions like Fully Connected (FC) Layer ,Non-Linear Activations, Subsampling and Vector of Random Floats To A Vector Of Probabilities, I have created **C++ template classes** with the names Matrix and Vector. The class have functions, to facilitate the implementation, along with operator overloading of + , * operators. Appropriate errors are also raised wherever needed, eg size mismatch, wrong arguments passed, no arguments passed and many more.
+
+For pThreads, the pMatrix class inherits from matrix class and has an extra fc function. This function takes in input as 3 matrix ie input matrix, weight matrix and bias matrix and implement fc by computing the final matrix in 16 threads. Each thread independently computes a part of the final matrix and hence never overlap or interfere as such. The struct pass values via pointers and reference to decrease copying overhead. The transpose of matrix 2 is taken as accessing elements row-wise is faster due to buffer.
+
+For openblas and mkl standard functions from library are implementing the fullyconnected function
