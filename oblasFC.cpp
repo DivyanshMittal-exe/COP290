@@ -63,11 +63,11 @@ void writeMatrix(string filename, float* mat, pair<int,int> dim)
 
 int oBFullyConnected(string input, string weight, string bias, string output){
 
-    float inputMat[10000];
+    float inputMat[100000];
     pair<int,int> inputDim = readMatrixArr(input, inputMat);
-    float weightMat[10000];
+    float weightMat[100000];
     pair<int,int> weightDim = readMatrixArr(weight, weightMat);
-    float biasMat[10000];
+    float biasMat[100000];
     pair<int,int> biasDim = readMatrixArr(bias, biasMat);
 
 
@@ -90,22 +90,23 @@ int oBFullyConnected(string input, string weight, string bias, string output){
 
 void timer()
 {
-    std::string input = "testcases/100/inputmatrix.txt";
-    std::string weight = "testcases/100/weightmatrix.txt";
-    std::string bias = "testcases/100/biasmatrix.txt";
-    std::string output = "testcases/100/outputOBlas.txt";
+    std::string base = "testcases/100/";
+    std::string input = base + "inputmatrix.txt";
+    std::string weight = base + "weightmatrix.txt";
+    std::string bias = base + "biasmatrix.txt";
+    std::string output = base + "outputOBlas.txt";
 
     std::ofstream outfile;
 
 
-    std::string filename = "data/oblas.dat";
+    std::string filename = "data/oblas100.dat";
     outfile.open(filename, std::fstream::out); //opening file stream
     if (!outfile)
     {
         throw "Error, Data file couldn't be opened/created";
     }
     
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 20; i++){
         int elapsed_time  = oBFullyConnected(input, weight, bias, output);
         outfile << elapsed_time << std::endl;
     }
@@ -122,11 +123,11 @@ int main(int argc, char *argv[])
             // No arguments given
             throw "Invalid format. No arguments given. Check out README for valid format.";
         }
-        else if (string(argv[1]) == "fullyconnected")
+        else if (string(argv[1]) == "oBfullyconnected")
         {
             if (argc != 6)
             {
-                throw "Invalid format. Correct format is as follows - ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
+                throw "Invalid format. Correct format is as follows - ./yourcode.out oBfullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
             }
             oBFullyConnected(argv[2], argv[3], argv[4], argv[5]);
         }else if (string(argv[1]) == "timer" && argc == 2) {
