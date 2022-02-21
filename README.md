@@ -18,6 +18,29 @@
 
  - Prints a matrix by taking the inner product of an input matrix of dimensions AxB and a weight matrix of dimensions BxC, to output a matrix of dimension AxC. To this output, a bias vector of dimension AXC is then added elementwise.
 
+- 4 implementations available are:
+  1. Normal 
+    ```
+    make
+    ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
+    ```
+  1. pThreads 
+    ```
+    make
+    ./yourcode.out pthread fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
+    ```
+  1. MKL 
+    ```
+    make mkl
+    ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
+    ```
+  1. Openblas 
+    ```
+    make oblas
+    ./yourcode.out oblas fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
+    ```
+
+
 Example: 
 
 ```

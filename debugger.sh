@@ -78,7 +78,7 @@ echo "a4b is correct"
 
 else 
 
-./yourcode.out pfullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
+./yourcode.out pthread fullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
 
 python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
 
