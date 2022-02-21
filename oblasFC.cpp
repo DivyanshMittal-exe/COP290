@@ -61,7 +61,7 @@ void writeMatrix(std::string filename, float* mat, std::pair<int,int> dim)
     outfile.close(); //closing file stream
 }
 
-int oBFullyConnected(std::string input, std::string weight, string bias, std::string output){
+int oBFullyConnected(std::string input, std::string weight, std::string bias, std::string output){
 
     float inputMat[100000];
     std::pair<int,int> inputDim = readMatrixArr(input, inputMat);
@@ -75,11 +75,11 @@ int oBFullyConnected(std::string input, std::string weight, string bias, std::st
     {
         throw "matrix sizes not compatible.";
     }
-    auto start = chrono::steady_clock::now();
+    auto start = std::chrono::steady_clock::now();
     cblas_sgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, inputDim.second, weightDim.first, inputDim.first, 1.0,  inputMat, inputDim.second, weightMat, weightDim.second, 1.0, biasMat, biasDim.second);
-    auto end = chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();
     std::cout << "Elapsed time in microseconds: "
-        << chrono::duration_cast<chrono::microseconds>(end - start).count()
+        << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
         << " µs" << std::endl;
 
     writeMatrix(output, biasMat, biasDim);
@@ -123,14 +123,14 @@ int main(int argc, char *argv[])
             // No arguments given
             throw "Invalid format. No arguments given. Check out README for valid format.";
         }
-        else if (string(argv[1]) == "oblas" && string(argv[2]) == "fullyconnected")
+        else if (std::string(argv[1]) == "oblas" && std::string(argv[2]) == "fullyconnected")
         {
             if (argc != 7)
             {
                 throw "Invalid format. Correct format is as follows - ./yourcode.out oblas fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
             }
             oBFullyConnected(argv[3], argv[4], argv[5], argv[6]);
-        }else if (string(argv[1]) == "timer" && argc == 2) {
+        }else if (std::string(argv[1]) == "timer" && argc == 2) {
             timer();
         }else {
             //Invalid arguments

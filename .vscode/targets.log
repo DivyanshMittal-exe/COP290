@@ -10,13 +10,20 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
  
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Mon Feb 21 19:11:53 2022
+ 
+# Make data base, printed on Mon Feb 21 22:00:49 2022
+ 
 
 # Variables
+ 
 
+ 
 # 'override' directive
+ 
 GNUMAKEFLAGS := 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -47,7 +54,6 @@ GDMSESSION = ubuntu
 XMODIFIERS = @im=ibus
 # makefile
 CURDIR := /home/jsr/Codes/COP290
- 
 # makefile
 SHELL = /bin/sh
 # environment
@@ -227,9 +233,9 @@ VSCODE_PID = 2029
 
 # Directories
 
-# . (device 2064, inode 658072): 16 files, no impossibilities.
+# . (device 2064, inode 658072): 17 files, no impossibilities.
 
-# 16 files, no impossibilities in 1 directories.
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -238,10 +244,11 @@ VSCODE_PID = 2029
 # Files
 
 pdebug: clean run
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 33):
+#  recipe to execute (from 'makefile', line 35):
 	sh debugger.sh pdebug
 
 all:
@@ -269,11 +276,11 @@ all:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  recipe to execute (from 'makefile', line 5):
+#  recipe to execute (from 'makefile', line 7):
 	@echo "Compiling"
 	@make run
 
-.PHONY: clean debug
+.PHONY: clean debug pdebug debug_all
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -282,7 +289,7 @@ Plain/Matrix.o: lib/Plain/Matrix.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 15):
+#  recipe to execute (from 'makefile', line 17):
 	@g++ -O3 -c -g ./lib/Plain/Matrix.cpp
 
 # Not a target:
@@ -295,7 +302,8 @@ Plain/Vector.o: lib/Plain/Vector.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 21):
+ 
+#  recipe to execute (from 'makefile', line 23):
 	@g++ -O3 -c -g ./lib/Plain/Vector.cpp
 
 # Not a target:
@@ -315,13 +323,13 @@ debug: clean run
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 30):
+#  recipe to execute (from 'makefile', line 32):
 	sh debugger.sh debug
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-21 18:55:32.64760372
+#  Last modified 2022-02-21 21:59:12.642837717
 #  File has been updated.
 #  Successfully updated.
 
@@ -337,11 +345,19 @@ lib/pThread/pMatrix.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+debug_all:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 38):
+	sh debugger.sh all
+
 oblas: oblasFC.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 27):
+#  recipe to execute (from 'makefile', line 29):
 	g++ -I/opt/OpenBLAS/include -o yourcode.out oblasFC.cpp  -L/opt/OpenBLAS/lib -lopenblas -lpthread -lgfortran
 
 # Not a target:
@@ -360,7 +376,7 @@ run: main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 9):
+#  recipe to execute (from 'makefile', line 11):
 	g++ -O3 -g -pthread main.o lib/Plain/Matrix.o lib/Plain/Vector.o lib/pThread/pMatrix.o -o yourcode.out
 
 # Not a target:
@@ -374,15 +390,14 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 36):
+#  recipe to execute (from 'makefile', line 44):
 	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 
 
 mkl: mklFC.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
-#  recipe to execute (from 'makefile', line 24):
+#  recipe to execute (from 'makefile', line 26):
 	g++ -I /usr/include/mkl mklFC.cpp -o ./yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 
 # Not a target:
@@ -395,14 +410,27 @@ main.o: main.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 12):
+#  recipe to execute (from 'makefile', line 14):
 	@g++ -O3 -c -g main.cpp
+
+plot: plot.sh
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 41):
+	gnuplot plot.sh
+
+# Not a target:
+plot.sh:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 pThread/pMatrix.o: lib/pThread/pMatrix.cpp
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 18):
+#  recipe to execute (from 'makefile', line 20):
 	@g++ -O3 -c -g -pthread ./lib/pThread/pMatrix.cpp
 
 # Not a target:
@@ -418,19 +446,19 @@ lib/pThread/pMatrix.cpp:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=24/1024=2%, Rehash=0, Collisions=4/56=7%
+# Load=27/1024=3%, Rehash=0, Collisions=4/66=6%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 38 / storage = 399 B / avg = 10 B
-# current buf: size = 8162 B / used = 399 B / count = 38 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 41 / storage = 421 B / avg = 10 B
+# current buf: size = 8162 B / used = 421 B / count = 41 / avg = 10 B
 
-# strcache performance: lookups = 68 / hit rate = 44%
+# strcache performance: lookups = 80 / hit rate = 48%
 # hash-table stats:
-# Load=38/8192=0%, Rehash=0, Collisions=1/68=1%
-# Finished Make data base on Mon Feb 21 19:11:53 2022
+# Load=41/8192=1%, Rehash=0, Collisions=1/80=1%
+# Finished Make data base on Mon Feb 21 22:00:49 2022
 
  

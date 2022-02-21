@@ -1,5 +1,7 @@
 .PHONY: clean
 .PHONY: debug
+.PHONY: pdebug
+.PHONY: debug_all
 
 all:
 	@echo "Compiling"
@@ -31,6 +33,9 @@ debug: clean run
 
 pdebug: clean run
 	sh debugger.sh pdebug
+
+debug_all:
+	sh debugger.sh all
 
 plot: plot.sh
 	gnuplot plot.sh

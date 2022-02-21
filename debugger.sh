@@ -76,10 +76,47 @@ if !(diff -w -q Subtask1TestCasesV1.1/a4b.outputvector.txt Subtask1TestCasesV1.1
     fi
 echo "a4b is correct"
 
-else 
+elif [ $1 = "pdebug" ];
+then
 
 ./yourcode.out pthread fullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
 
 python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
+
+else
+
+make clean
+
+make 
+
+./yourcode.out fullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
+python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
+
+rm -rf pTestCase/test_outputmatrix.txt
+
+./yourcode.out pthread fullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
+python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
+
+rm -rf pTestCase/test_outputmatrix.txt
+
+make clean
+make mkl
+
+./yourcode.out mkl fullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
+python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
+
+rm -rf pTestCase/test_outputmatrix.txt
+
+make clean
+make oblas
+
+./yourcode.out oblas fullyconnected pTestCase/inputmatrix.txt pTestCase/weightmatrix.txt pTestCase/biasmatrix.txt pTestCase/test_outputmatrix.txt
+python utils/file_comp.py pTestCase/outputmatrix.txt pTestCase/test_outputmatrix.txt
+
+rm -rf pTestCase/test_outputmatrix.txt
+
+make clean
+
+
 
 fi

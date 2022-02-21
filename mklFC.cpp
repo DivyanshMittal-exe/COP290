@@ -73,11 +73,11 @@ int mklFullyConnected(std::string input, std::string weight, std::string bias, s
     {
         throw "matrix sizes not compatible.";
     }
-    auto start = chrono::steady_clock::now();
+    auto start = std::chrono::steady_clock::now();
     cblas_sgemm(CblasColMajor, CblasNoTrans, CblasNoTrans, inputDim.second, weightDim.first, inputDim.first, 1.0,  inputMat, inputDim.second, weightMat, weightDim.second, 1.0, biasMat, biasDim.second);
-    auto end = chrono::steady_clock::now();
+    auto end = std::chrono::steady_clock::now();
     std::cout << "Elapsed time in microseconds: "
-        << chrono::duration_cast<chrono::microseconds>(end - start).count()
+        << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()
         << " µs" << std::endl;
 
     writeMatrix(output, biasMat, biasDim);

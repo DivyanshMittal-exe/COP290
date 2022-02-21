@@ -174,5 +174,5 @@ For openblas and mkl standard functions from library are implementing the fullyc
 ## Utils and Misc
 
 1. Python files like "fc_tester.py","file_comp.py" and "stats.py" are helper files, which were used to generate testing data, assert correctness of functions and compute the SD and Avg of data.
-2. debugger.sh implements `make debug` and `make pgebug`, used to debug our files.
+2. debugger.sh implements `make debug`,`make pgebug` and `make debug_all`, used to debug our files.
 3. './yourcode.out timer' runs the FC functions on a set of matrices 100 times and generates a .dat file in /data with the run times
