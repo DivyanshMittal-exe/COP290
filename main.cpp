@@ -32,11 +32,9 @@ void pmfc(std::string input_file, std::string weight_matrix, std::string bias_ma
 {
     try
     {
-        std::cout << "Less Go";
         pMatrix m_in(input_file);
         pMatrix m_wgt(weight_matrix);
         pMatrix m_bias(bias_matrix);
-        std::cout << "Less Go";
 
         auto start = std::chrono::steady_clock::now();
 
@@ -157,7 +155,6 @@ int main(int argc, char *argv[])
     // cout << "Welcome!"<<endl;
     // cout << "Submission for COP290-2022 Subtask 1 by Divyansh, 2020CS10342" << endl;
     // cout << "Enter 'h' for help, 'e' to exit"<<endl;
-    std::cout << "Less Go";
     try
     {
         // Throw error if less arguments
