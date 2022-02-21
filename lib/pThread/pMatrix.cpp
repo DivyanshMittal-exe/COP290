@@ -238,7 +238,7 @@ pMatrix pMatrix::operator*(const pMatrix &Matrix_2)
         
         pMatrix m2t = Matrix_2.transpose();
 
-        const int thread_c = 5;
+        const int thread_c = 4;
 
         pthread_t thread[thread_c][thread_c];
         struct mul ss[thread_c][thread_c];
