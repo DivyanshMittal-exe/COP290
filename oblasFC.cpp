@@ -61,13 +61,13 @@ void writeMatrix(string filename, float* mat, pair<int,int> dim)
     outfile.close(); //closing file stream
 }
 
-void oBFullyConnected(string input, string weight, string bias, string output){
+int oBFullyConnected(string input, string weight, string bias, string output){
 
-    float inputMat[2000];
+    float inputMat[10000];
     pair<int,int> inputDim = readMatrixArr(input, inputMat);
-    float weightMat[2000];
+    float weightMat[10000];
     pair<int,int> weightDim = readMatrixArr(weight, weightMat);
-    float biasMat[2000];
+    float biasMat[10000];
     pair<int,int> biasDim = readMatrixArr(bias, biasMat);
 
 
@@ -83,14 +83,40 @@ void oBFullyConnected(string input, string weight, string bias, string output){
         << " µs" << endl;
 
     writeMatrix(output, biasMat, biasDim);
+
+    return (int)std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
     
+}
+
+void timer()
+{
+    std::string input = "a100inputmatrix.txt";
+    std::string weight = "a100weightmatrix.txt";
+    std::string bias = "a100biasmatrix.txt";
+    std::string output = "a100outmatrix.txt";
+
+    std::ofstream outfile;
+
+
+    std::string filename = "data/oblas.dat";
+    outfile.open(filename, std::fstream::out); //opening file stream
+    if (!outfile)
+    {
+        throw "Error, Data file couldn't be opened/created";
+    }
     
+    for(int i = 0; i < 100; i++){
+        int elapsed_time  = oBFullyConnected(input, weight, bias, output);
+        outfile << elapsed_time << std::endl;
+    }
+    outfile.close();
 }
 
 int main(int argc, char *argv[])
 {
      try
     {
+
         if (argc == 1)
         {
             // No arguments given
@@ -103,6 +129,11 @@ int main(int argc, char *argv[])
                 throw "Invalid format. Correct format is as follows - ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
             }
             oBFullyConnected(argv[2], argv[3], argv[4], argv[5]);
+        }else if (string(argv[1]) == "timer" && argc == 2) {
+            timer();
+        }else {
+            //Invalid arguments
+            throw "Invalid Input. Check out README for valid parameter format.";
         }
     }
     catch (const char *msg)
