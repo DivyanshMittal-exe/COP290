@@ -1,41 +1,23 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Mon Feb 21 01:38:34 2022
- 
+# Make data base, printed on Mon Feb 21 14:51:09 2022
 
 # Variables
- 
 
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
- 
 # environment
- 
 MKL_THREADING_LAYER = GNU
- 
 # environment
 DESKTOP_SESSION = ubuntu
 # default
@@ -67,7 +49,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:37220
+JOURNAL_STREAM = 8:33471
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
@@ -85,7 +67,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1719
+MANAGERPID = 1173
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -97,7 +79,7 @@ PATH = /home/jsr/.local/bin:/home/jsr/.local/bin:/usr/local/sbin:/usr/local/bin:
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1974,unix/jsr-VirtualBox:/tmp/.ICE-unix/1974
+SESSION_MANAGER = local/jsr-VirtualBox:@/tmp/.ICE-unix/1431,unix/jsr-VirtualBox:/tmp/.ICE-unix/1431
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -107,7 +89,7 @@ VSCODE_LOG_STACK = false
 # environment
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
 # environment
-INVOCATION_ID = 91a0e9ae9616409a808a3ff5352eb8ce
+INVOCATION_ID = af97aae3b61a4f21bb098e59a5225ba8
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -117,7 +99,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3535
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4223
 # automatic
 %F = $(notdir $%)
 # environment
@@ -129,7 +111,7 @@ PWD = /home/jsr/Codes/COP290
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1931
+SSH_AGENT_PID = 1386
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -165,7 +147,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5c79cce8-30e6-49b7-8ad0-60a8fe56dae6.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-76163c8d-762b-42ec-85b7-d3fb3da0c497.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -229,7 +211,7 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3535
+VSCODE_PID = 4223
 # variable set hash-table stats:
 # Load=101/1024=10%, Rehash=0, Collisions=14/129=11%
 
@@ -239,9 +221,9 @@ VSCODE_PID = 3535
 
 # Directories
 
-# . (device 2064, inode 698666): 28 files, no impossibilities.
+# . (device 2064, inode 658072): 16 files, no impossibilities.
 
-# 28 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -296,6 +278,7 @@ Plain/Matrix.o: lib/Plain/Matrix.cpp
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 15):
 	@g++ -c -g ./lib/Plain/Matrix.cpp
+ 
 
 # Not a target:
 lib/Plain/Matrix.cpp:
@@ -314,7 +297,6 @@ Plain/Vector.o: lib/Plain/Vector.cpp
 lib/Plain/Vector.cpp:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 # Not a target:
@@ -334,7 +316,7 @@ debug: clean run
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-02-21 01:38:01.646041355
+#  Last modified 2022-02-21 14:49:17.776161582
 #  File has been updated.
 #  Successfully updated.
 
@@ -434,16 +416,15 @@ lib/pThread/pMatrix.cpp:
 # VPATH Search Paths
 
 # No 'vpath' search paths.
- 
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 49 / storage = 593 B / avg = 12 B
-# current buf: size = 8162 B / used = 593 B / count = 49 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 38 / storage = 421 B / avg = 11 B
+# current buf: size = 8162 B / used = 421 B / count = 38 / avg = 11 B
 
-# strcache performance: lookups = 80 / hit rate = 38%
+# strcache performance: lookups = 68 / hit rate = 44%
 # hash-table stats:
-# Load=49/8192=1%, Rehash=0, Collisions=1/80=1%
-# Finished Make data base on Mon Feb 21 01:38:34 2022
+# Load=38/8192=0%, Rehash=0, Collisions=1/68=1%
+# Finished Make data base on Mon Feb 21 14:51:09 2022
 
  
