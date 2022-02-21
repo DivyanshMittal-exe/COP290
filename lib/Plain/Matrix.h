@@ -18,7 +18,11 @@ public:
     std::vector<std::vector<T>> elements;
 
     Matrix();
+    Matrix(int row,int col);
     Matrix(const std::string &filename);
+
+    Matrix<T> transpose() const;
+
 
     T getElement (int i, int j) const;
 

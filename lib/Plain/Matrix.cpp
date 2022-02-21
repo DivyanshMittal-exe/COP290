@@ -37,13 +37,35 @@ Matrix<T>::Matrix()
     row = 0;
     col = 0;
 }
-template <typename T>
 
-// Returns element (i,j)
-T Matrix<T>::getElement(int i, int j) const 
+template <typename T>
+Matrix<T>::Matrix(int r, int c)
 {
-    std::vector<T> row = elements.at(i);
-    return row.at(j);
+    row = r;
+    col = c;
+    std::vector<std::vector<T>> elems(row, std::vector<T>(col, 0));
+    elements = elems;
+}
+
+template <typename T>
+// Returns element (i,j)
+inline T Matrix<T>::getElement(int i,int j) const 
+{
+    return elements[i][j];
+}
+
+template <typename T>
+Matrix<T> Matrix<T>::transpose() const
+{
+    Matrix<T> Matrix_return(col, row);
+    for (int r = 0; r < row; r++)
+    {
+        for (int c = 0; c < col; c++)
+        {
+            Matrix_return.elements[c][r] = elements[r][c];
+        }
+    }
+    return Matrix_return;
 }
 
 //Returns a matrix with relu applied on it
@@ -61,7 +83,7 @@ Matrix<T> Matrix<T>::relu()
         std::vector<T> col_vec;
         for (int c = 0; c < col; c++)
         {
-            T val = getElement(r, c);
+            T val = elements[r][ c];
             val = val > 0 ? val : 0;
             col_vec.push_back(val);
         }
@@ -87,7 +109,7 @@ Matrix<T> Matrix<T>::matrix_tanh()
         std::vector<T> col_vec;
         for (int c = 0; c < col; c++)
         {
-            T val = getElement(r, c);
+            T val = elements[r][ c];
             //Implementation of tanh with exp
             T ex = exp(val);
             T neg_ex = exp(-val);
@@ -127,12 +149,12 @@ Matrix<T> Matrix<T>::max_pooling(int stride)
         std::vector<T> col_vec;
         for (int c = 0; c < col; c += stride)
         {
-            T val = getElement(r, c);
+            T val = elements[r][ c];
             for (int i = 0; i < stride; i++)
             {
                 for (int j = 0; j < stride; j++)
                 {
-                    val = std::max(val, getElement(r + i, c + j));
+                    val = std::max(val, elements[r + i][ c + j]);
                 }
             }
             col_vec.push_back(val);
@@ -177,7 +199,7 @@ Matrix<T> Matrix<T>::avg_pooling(int stride)
             {
                 for (int j = 0; j < stride; j++)
                 {
-                    val += getElement(r + i, c + j);
+                    val += elements[r + i][ c + j];
                 }
             }
             val /= (stride * stride);
@@ -200,9 +222,6 @@ void Matrix<T>::print(const std::string &filename)
     output_file << col << std::endl;
     output_file << row << std::endl;
 
-    typename std::vector<std::vector<T>>::iterator r;
-    typename std::vector<T>::iterator c;
-
     for (int i = 0; i < col; i++)
     {
         for (int j = 0; j < row; j++)
@@ -217,7 +236,7 @@ void Matrix<T>::print(const std::string &filename)
 template <typename T>
 Matrix<T> Matrix<T>::operator*(const Matrix<T> &Matrix_2)
 {
-    Matrix<T> Matrix_return;
+    Matrix<T> Matrix_return(row,Matrix_2.col);
     std::vector<std::vector<T>> elem;
     try
     {
@@ -227,22 +246,20 @@ Matrix<T> Matrix<T>::operator*(const Matrix<T> &Matrix_2)
         }
         Matrix_return.row = row;
         Matrix_return.col = Matrix_2.col;
-
+        
+        Matrix<T> matrix_transpose = Matrix_2.transpose();
         for (int r = 0; r < row; r++)
         {
-            std::vector<T> col_vec;
             for (int c = 0; c < Matrix_2.col; c++)
             {
                 T val = 0.0f;
                 for (int i = 0; i < col; i++)
                 {
-                    val += getElement(r, i) * Matrix_2.getElement(i, c);
+                    val += elements[r][i] * matrix_transpose.elements[c][i];
                 }
-                col_vec.push_back(val);
+                Matrix_return.elements[r][c] = val;
             }
-            elem.push_back(col_vec);
         }
-        Matrix_return.elements = elem;
     }
     catch (const std::exception &e)
     {
@@ -256,8 +273,7 @@ Matrix<T> Matrix<T>::operator*(const Matrix<T> &Matrix_2)
 template <typename T>
 Matrix<T> Matrix<T>::operator+(const Matrix<T> &Matrix_2)
 {
-    Matrix<T> Matrix_return;
-    std::vector<std::vector<T>> elem;
+    Matrix<T> Matrix_return(row,col);
     try
     {
         if (row != Matrix_2.row || col != Matrix_2.col)
@@ -269,15 +285,11 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T> &Matrix_2)
 
         for (int r = 0; r < row; r++)
         {
-            std::vector<T> col_vec;
             for (int c = 0; c < col; c++)
             {
-                T val = getElement(r, c) + Matrix_2.getElement(r, c);
-                col_vec.push_back(val);
+                Matrix_return.elements[r][c] = elements[r][ c] + Matrix_2.elements[r][ c];  
             }
-            elem.push_back(col_vec);
         }
-        Matrix_return.elements = elem;
     }
     catch (const std::exception &e)
     {
