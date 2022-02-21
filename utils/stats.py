@@ -1,0 +1,33 @@
+import statistics
+
+def stats(filename):
+    f  = open('data/' + filename, "r")
+    data = [float(x) for x in f.read().strip().split('\n')]
+    print("Avg:-" + str(statistics.mean(data)))
+    print("Std:-" + str(statistics.stdev(data)))
+    f.close()
+
+print("plain100")
+stats("plain100.dat")
+print("plain200")
+stats("plain200.dat")
+print("plain300")
+stats("plain300.dat")
+print("pthread100")
+stats("pthread100.dat")
+print("pthread200")
+stats("pthread200.dat")
+print("pthread300")
+stats("pthread300.dat")
+print("mkl100")
+stats("mkl100.dat")
+print("mkl200")
+stats("mkl200.dat")
+print("mkl300")
+stats("mkl300.dat")
+print("oblas100")
+stats("oblas100.dat")
+print("oblas200")
+stats("oblas200.dat")
+print("oblas300")
+stats("oblas300.dat")
