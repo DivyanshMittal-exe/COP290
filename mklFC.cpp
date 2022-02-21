@@ -90,10 +90,10 @@ int mklFullyConnected(string input, string weight, string bias, string output){
 
 void timer()
 {
-    std::string input = "a100inputmatrix.txt";
-    std::string weight = "a100weightmatrix.txt";
-    std::string bias = "a100biasmatrix.txt";
-    std::string output = "a100outmatrix.txt";
+    std::string input = "testcases/100/inputmatrix.txt";
+    std::string weight = "testcases/100/weightmatrix.txt";
+    std::string bias = "testcases/100/biasmatrix.txt";
+    std::string output = "testcases/100/outputMkl.txt";
 
     std::ofstream outfile;
 
