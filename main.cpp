@@ -66,10 +66,10 @@ int pmfc(std::string input_file, std::string weight_matrix, std::string bias_mat
 
 void timer()
 {
-    std::string input = "a100inputmatrix.txt";
-    std::string weight = "a100weightmatrix.txt";
-    std::string bias = "a100biasmatrix.txt";
-    std::string output = "a100outmatrix.txt";
+    std::string input = "testcases/100/inputmatrix.txt";
+    std::string weight = "testcases/100/weightmatrix.txt";
+    std::string bias = "testcases/100/biasmatrix.txt";
+    std::string output = "testcases/100/outputPlain.txt";
 
     std::ofstream outfile;
     std::string filename = "data/plain.dat";
@@ -85,13 +85,13 @@ void timer()
     }
     outfile.close();
 
+    output = "testcases/100/outputPThread.txt";
     filename = "data/pthread.dat";
     outfile.open(filename, std::fstream::out); //opening file stream
     if (!outfile)
     {
         throw "Error, Data file couldn't be opened/created";
     }
-    
     for(int i = 0; i < 100; i++){
         int elapsed_time  = pmfc(input, weight, bias, output);
         outfile << elapsed_time << std::endl;
