@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
         }
         else if (string(argv[1]) == "oblas" && string(argv[2]) == "fullyconnected")
         {
-            if (argc != 6 || argc != 7)
+            if (argc != 7)
             {
                 throw "Invalid format. Correct format is as follows - ./yourcode.out oblas fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
             }

@@ -1,4 +1,4 @@
-// Submission by Divyansh Mittal, 2020CS10342
+// Submission by Divyansh Mittal, 2020CS10342 Vaibhav Agarwal, 2020CS10447
 
 #include <iostream>
 #include <string.h>
@@ -66,34 +66,34 @@ int pmfc(std::string input_file, std::string weight_matrix, std::string bias_mat
 
 void timer()
 {
-    std::string base = "testcases/1000/";
+    std::string base = "testcases/300/";
     std::string input = base + "inputmatrix.txt";
     std::string weight = base + "weightmatrix.txt";
     std::string bias = base + "biasmatrix.txt";
     std::string output = base + "outputPlain.txt";
 
     std::ofstream outfile;
-    std::string filename = "data/plain1000.dat";
+    std::string filename = "data/plain300.dat";
     outfile.open(filename, std::fstream::out); //opening file stream
     if (!outfile)
     {
         throw "Error, Data file couldn't be opened/created";
     }
     
-    for(int i = 0; i < 1; i++){
+    for(int i = 0; i < 100; i++){
         int elapsed_time  = mfc(input, weight, bias, output);
         outfile << elapsed_time << std::endl;
     }
     outfile.close();
 
     output = base + "outputPThread.txt";
-    filename = "data/pthread1000.dat";
+    filename = "data/pthread300.dat";
     outfile.open(filename, std::fstream::out); //opening file stream
     if (!outfile)
     {
         throw "Error, Data file couldn't be opened/created";
     }
-    for(int i = 0; i < 1; i++){
+    for(int i = 0; i < 100; i++){
         int elapsed_time  = pmfc(input, weight, bias, output);
         outfile << elapsed_time << std::endl;
     }

@@ -116,12 +116,12 @@ outputvector.txt | Contains vector of probabilities obtained by converting input
 
 Implementation | Size | Average | Stand Dev
 ------------ | ------------- | ------------- | -------------
-Plain | 100 x 100 | 9520.78 | 658.29
-Plain | 200 x 200 | 63370.35 | 2045.94
-Plain | 300 x 300 | 215206.17 | 10489.38
-PThread | 100 x 100 | 8089.14 | 895.47
-PThread | 200 x 200 | 54718.96 | 2305.83
-PThread | 300 x 300 | 192907.44 | 8574.35
+Plain | 100 x 100 | 9083.77 | 1057.02
+Plain | 200 x 200 | 63055.11 | 1912.02
+Plain | 300 x 300 | 213294.74 | 11255.28
+PThread | 100 x 100 | 7526.6 | 640.79
+PThread | 200 x 200 | 54287.89 | 2786.88
+PThread | 300 x 300 | 196778.34 | 17200.90
 MKL | 100 x 100 | 375.11 | 2546.68
 MKL | 200 x 200 | 372.44 | 2092.87
 MKL | 300 x 300 | 549.07 | 1989.19
@@ -145,6 +145,8 @@ Simply run the make file by `make` command for plain and pthreads implementation
 Then write the command you want to run, similarly to the example given above. 
 
 The output would be written in the file **outputvector.txt**/**outputmatrix.txt**
+
+Use `make plot` command to make a GNUPlot of the data in /data
 
 ## Internal Implementation
 
