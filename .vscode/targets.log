@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Mar  5 00:16:56 2022
+# Make data base, printed on Sat Mar  5 01:25:59 2022
 
 # Variables
 
@@ -87,6 +87,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 VSCODE_LOG_STACK = false
 # environment
+ 
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
 # environment
 INVOCATION_ID = 285b1b96aac84d848c5e6f33df13a6a7
@@ -221,9 +222,9 @@ VSCODE_PID = 4410
 
 # Directories
 
-# . (device 2064, inode 658072): 21 files, no impossibilities.
+# . (device 2064, inode 658072): 22 files, no impossibilities.
 
-# 21 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -272,24 +273,29 @@ all:
 #  File has not been updated.
 
 # Not a target:
+libaudio.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 debug: clean run
- 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 14):
+#  recipe to execute (from 'makefile', line 21):
 	sh debugger.sh debug
 
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-03-05 00:16:34.926382753
+#  Last modified 2022-03-05 01:25:42.182976034
 #  File has been updated.
 #  Successfully updated.
 
@@ -305,41 +311,55 @@ audio.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
+libaudio.o: libaudio.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 14):
+	g++ -I /usr/include/mkl -c -g libaudio.cpp -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-run: audio.cpp
+run: audio.o libaudio.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 11):
-	g++ -I /usr/include/mkl audio.cpp -o ./yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+	g++ -O3 -g audio.o libaudio.o -o yourcode.out
 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 17):
+#  recipe to execute (from 'makefile', line 24):
 	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 
 
+audio.o: audio.cpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 17):
+	@g++ -O3 -c -g audio.cpp
+
 # files hash-table stats:
-# Load=11/1024=1%, Rehash=0, Collisions=0/35=0%
+# Load=14/1024=1%, Rehash=0, Collisions=0/43=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 32 / storage = 305 B / avg = 9 B
-# current buf: size = 8162 B / used = 305 B / count = 32 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 33 / storage = 311 B / avg = 9 B
+# current buf: size = 8162 B / used = 311 B / count = 33 / avg = 9 B
 
-# strcache performance: lookups = 54 / hit rate = 40%
+# strcache performance: lookups = 62 / hit rate = 46%
 # hash-table stats:
-# Load=32/8192=0%, Rehash=0, Collisions=1/54=2%
-# Finished Make data base on Sat Mar  5 00:16:57 2022
+# Load=33/8192=0%, Rehash=0, Collisions=1/62=2%
+# Finished Make data base on Sat Mar  5 01:25:59 2022
 
  

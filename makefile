@@ -7,8 +7,15 @@ all:
 	@echo "Compiling"
 	@make run
 
-run: audio.cpp
-	g++ -I /usr/include/mkl audio.cpp -o ./yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+run: audio.o libaudio.o 
+	g++ -O3 -g audio.o libaudio.o -o yourcode.out
+
+libaudio.o: libaudio.cpp
+	g++ -I /usr/include/mkl -c -g libaudio.cpp -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+
+audio.o: audio.cpp
+	@g++ -O3 -c -g audio.cpp
+
 
 debug: clean run
 	sh debugger.sh debug
