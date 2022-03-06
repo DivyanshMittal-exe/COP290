@@ -7,13 +7,10 @@
     -   [Subsampling](#---subsampling)
     -   [Vector of Random Floats To A Vector Of Probabilities](#---vector-of-random-floats-to-a-vector-of-probabilities)
   - [Data fully connected](#data-fully-connected)
-  - [Inference](#inference)
-  - [Sample Graphs](#sample-graphs)
   - [How to input matrix/vector](#how-to-input-matrixvector)
   - [How to run the code](#how-to-run-the-code)
-  - [Internal Implementation](#internal-implementation)
+  - [Implementation](#implementation)
   - [Utils and Misc](#utils-and-misc)
-  - [Graphs](#graphs)
 
 ## Available Functions
   
@@ -88,11 +85,6 @@ Example:
 ./yourcode.out probability sigmoid inputvector.txt outputvector.txt
 ```
 
-## Inference
-What we observed was that MKL was the fastest implementation, then OpenBLAS, then PThreads and the normal implementation was the slowest. There was a huge gap between Pthreads and the optimised libraries.
-
-The mkl and openblas libraries are magnitudes faster than our naiive implementations. While we have tried to optimise our code as much as possible. Eg we pass parameters which dont change as const reference, so that we dont waste time copying parameters. For multiplication, we take transpose of matrix, to convert the column into a continuous vector<float>, as reading contigous memory is faster. pThreads breaks the task into 16 chunks by creating 16 threads. 
-
 
 ## How to input matrix/vector
 
@@ -113,13 +105,14 @@ The output would be appended in the file **out.txt**
 
 Requirement - the variable MKL_BLAS_PATH in environment is set appropriately ($export MKL_BLAS_PATH=/usr/include/mkl). One can also edit the MakeFile to set the MKL_BLAS_PATH appropriately.
 
-## Internal Implementation
+## Implementation
 
-To implement the various functions like Fully Connected (FC) Layer ,Non-Linear Activations, Subsampling and Vector of Random Floats To A Vector Of Probabilities, I have created **C++ template classes** with the names Matrix and Vector. The class have functions, to facilitate the implementation, along with operator overloading of + , * operators. Appropriate errors are also raised wherever needed, eg size mismatch, wrong arguments passed, no arguments passed and many more.
+We are using our mkl implementation of fully connected layer from stage 2 for this assignment. We have made a libaudio.cpp file which is the cpp file for the library. libaudio.so is the .so file for the library which can be used in other programs after linking and using the -laudio flag.
 
-For pThreads, the pMatrix class inherits from matrix class and has an extra fc function. This function takes in input as 3 matrix ie input matrix, weight matrix and bias matrix and implement fc by computing the final matrix in 16 threads. Each thread independently computes a part of the final matrix and hence never overlap or interfere as such. The struct pass values via pointers and reference to decrease copying overhead. The transpose of matrix 2 is taken as accessing elements row-wise is faster due to buffer.
+In main.cpp ...
 
-For openblas and mkl standard functions from library are implementing the fullyconnected function.For internal implementation we are storing the matrix in an array (We have made arrays of size 10000). For other implementations we are storing the matrix as vector of vectors.
+
+
 
 ## Utils and Misc
 

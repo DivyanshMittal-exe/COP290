@@ -9,20 +9,20 @@ all:
 	@echo "Compiling"
 	@make run
 
-run: main.o libaudio.o 
-	g++ -I /usr/include/mkl  -O3 -g main.o libaudio.o -o yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+# run: main.o libaudio.o 
+# 	g++ -I /usr/include/mkl  -O3 -g main.o libaudio.o -o yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 
-libaudio.o: libaudio.cpp
-	g++ -c -g libaudio.cpp 
+# libaudio.o: libaudio.cpp
+# 	g++ -c -g libaudio.cpp 
 
-main.o: main.cpp
-	@g++ -O3 -c -g main.cpp
+# main.o: main.cpp
+# 	@g++ -O3 -c -g main.cpp
 
 lib: libaudio.cpp
 	g++ -I $(MKL_BLAS_PATH) -c -Wall -Werror -fpic libaudio.cpp -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 	g++ -shared -o libaudio.so libaudio.o
 
-compile: main.cpp
+run: main.cpp
 	g++ -I $(MKL_BLAS_PATH) -L . -Wl,-rpath=. -Wall -o yourcode.out main.cpp -laudio -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 
 
