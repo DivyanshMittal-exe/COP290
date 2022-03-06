@@ -11,11 +11,12 @@
 void readAudio(const char* filename, float* mat)
 {
     //Handling file handling exceptions
+
     std::ifstream infile;
     infile.open(filename); //opening file stream
     if (!infile)
     {
-        throw "Error, File couldn't be opened";
+        throw std::runtime_error("Error, File couldn't be opened \n");
     }
     
     for (int i = 0; i < 250; i++)
@@ -24,6 +25,8 @@ void readAudio(const char* filename, float* mat)
     }
 
     infile.close(); //closing file stream
+
+
 }
 
 void relu(const int size, float matrix[]){
