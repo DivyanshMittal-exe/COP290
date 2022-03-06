@@ -15,8 +15,7 @@ int main(int argc, char *argv[])
     {
         if (argc == 1)
         {
-            // No arguments given
-            throw "Invalid format. No arguments given. Check out README for valid format.";
+            throw  std::runtime_error("Invalid format. No arguments given. Check out README for valid format.");
         }else if (argc == 3){
             std::string audios[] = {"silence","unknown","yes","no","up","down","left","right","on","off","stop","go"};
             pred_t prediction[3];
@@ -30,14 +29,12 @@ int main(int argc, char *argv[])
             outfile.close();
 
         }else {
-             throw "Invalid format. Correct format is as follows - ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
+             throw std::runtime_error("Invalid format. Correct format is as follows - ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt");
         }
-
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
-
     return 0;
 }
