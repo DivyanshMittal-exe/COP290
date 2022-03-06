@@ -8,10 +8,8 @@
 
 
 
-void readAudio(char* filename, float* mat)
+void readAudio(const char* filename, float* mat)
 {
-    int A, B; // AxB matrix
-
     //Handling file handling exceptions
     std::ifstream infile;
     infile.open(filename); //opening file stream

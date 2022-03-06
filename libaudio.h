@@ -10,7 +10,7 @@ typedef struct{
 
 extern pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred);
 
-extern void readAudio(std::string filename, float* mat);
+extern void readAudio(const char* filename, float* mat);
 
 extern void relu(int size, float matrix[]);
 
