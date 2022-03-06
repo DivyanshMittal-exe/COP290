@@ -52,7 +52,7 @@ void fullyconnected(int a,int b, int c, float inputMat[],float weightMat[],float
 
 }
 
-std::pair<int,float> getmax (float arr[],int size = 12){
+pred_t getmax (float arr[],int size = 12){
     float max_val= 0.0f;
     int max_locn = 0;
     for (int i = 0; i < size; i++)
@@ -61,11 +61,13 @@ std::pair<int,float> getmax (float arr[],int size = 12){
         max_locn = max_val==arr[i] ? i:max_locn;
     }
     arr[max_locn] *= -1;
-    std::pair<int, float> p(max_locn, max_val);
-    return p;
+    pred_t to_return;
+    to_return.label = max_locn;
+    to_return.prob = max_val;
+    return to_return;
 }
 
-void predict_audio(char* inputfile, char* outputfile){
+pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred){
     float w1[] = IP1_WT;
     float w2[] = IP2_WT;
     float w3[] = IP3_WT;
@@ -77,7 +79,7 @@ void predict_audio(char* inputfile, char* outputfile){
     float b4[] = IP4_BIAS;
 
     float inputMat[250];
-    readAudio(inputfile, inputMat);
+    readAudio(audiofeatures, inputMat);
 
     fullyconnected(1,250,144,inputMat,w1,b1);
     relu(144,b1);
@@ -88,21 +90,14 @@ void predict_audio(char* inputfile, char* outputfile){
     fullyconnected(1,144,12,b3,w4,b4);
     softmax(12,b4);
 
-    for(int i = 0; i< 12 ;i++){
-        std::cout << b4[i] << " ";
-    }
+    // for(int i = 0; i< 12 ;i++){
+    //     std::cout << b4[i] << " ";
+    // }
 
-    std::string audios[] = {"silence","unknown","yes","no","up","down","left","right","on","off","stop","go"};
-    std::pair<int,float> pred1 = getmax(b4);
-    std::pair<int,float> pred2 = getmax(b4);
-    std::pair<int,float> pred3 = getmax(b4);
-
-    std::ofstream outfile;
-    outfile.open(outputfile , std::ios_base::app | std::ios_base::out);
-    outfile << inputfile << " ";
-    outfile << audios[pred1.first] << " " << audios[pred2.first] << " " << audios[pred3.first] << " " ;
-    outfile << pred1.second << " "<< pred2.second << " " << pred3.second << " ";
-    outfile << std::endl;
-    outfile.close();
+    
+    pred[0] = getmax(b4);
+    pred[1] = getmax(b4);
+    pred[2] = getmax(b4);
+    return pred;
 
 }

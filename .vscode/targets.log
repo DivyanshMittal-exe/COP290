@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Mar  5 01:25:59 2022
+# Make data base, printed on Sun Mar  6 09:31:16 2022
 
 # Variables
 
@@ -49,7 +49,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/share/code/code
 # environment
-JOURNAL_STREAM = 8:34862
+JOURNAL_STREAM = 8:32626
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'makefile', line 1)
@@ -67,7 +67,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1195
+MANAGERPID = 1184
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -87,10 +87,9 @@ XDG_MENU_PREFIX = gnome-
 # environment
 VSCODE_LOG_STACK = false
 # environment
- 
 VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&iid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd&sid=a2ff91e2-aba2-4229-93b2-07757c3ab6fd","uploadToServer":true}
 # environment
-INVOCATION_ID = 285b1b96aac84d848c5e6f33df13a6a7
+INVOCATION_ID = 27d2250f2b81490598f84681a87bdcd2
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -100,7 +99,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 4410
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1934
 # automatic
 %F = $(notdir $%)
 # environment
@@ -112,7 +111,7 @@ PWD = /home/jsr/Codes/COP290
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1406
+SSH_AGENT_PID = 1401
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -148,7 +147,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-06938bbd-28cf-43fd-9003-393a8709c439.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5d20d27e-ca3b-41d0-baf0-a0b915b9edb4.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -212,7 +211,7 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-VSCODE_PID = 4410
+VSCODE_PID = 1934
 # variable set hash-table stats:
 # Load=101/1024=10%, Rehash=0, Collisions=14/129=11%
 
@@ -279,6 +278,7 @@ libaudio.cpp:
 #  File has not been updated.
 
 # Not a target:
+ 
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -360,6 +360,6 @@ audio.o: audio.cpp
 # strcache performance: lookups = 62 / hit rate = 46%
 # hash-table stats:
 # Load=33/8192=0%, Rehash=0, Collisions=1/62=2%
-# Finished Make data base on Sat Mar  5 01:25:59 2022
+# Finished Make data base on Sun Mar  6 09:31:16 2022
 
  
