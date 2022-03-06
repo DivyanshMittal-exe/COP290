@@ -1,121 +1,45 @@
 # COP290 Subtask 3
 
-
-  - [Available Functions](#Available-Functions)
-    -   [Fully Connected (FC) Layer](#---fully-connected-fc-layer)
-    -   [Non-Linear Activations](#---non-linear-activations)
-    -   [Subsampling](#---subsampling)
-    -   [Vector of Random Floats To A Vector Of Probabilities](#---vector-of-random-floats-to-a-vector-of-probabilities)
-  - [Data fully connected](#data-fully-connected)
-  - [How to input matrix/vector](#how-to-input-matrixvector)
   - [How to run the code](#how-to-run-the-code)
   - [Implementation](#implementation)
-  - [Utils and Misc](#utils-and-misc)
-
-## Available Functions
-  
-  Various functions implemented are:
-
-### -  Fully Connected (FC) Layer
-
- - Prints a matrix by taking the inner product of an input matrix of dimensions AxB and a weight matrix of dimensions BxC, to output a matrix of dimension AxC. To this output, a bias vector of dimension AXC is then added elementwise.
-
-    ```
-
-
-Filename | Description | Size
------------- | ------------- | -------------
-inputmatrix.txt | Contains the input matrix | A x C
-weightmatrix.txt | Contains the weight matrix | B x C
-biasmatrix.txt | Contains the bias matrix | A x C
-outputmatrix.txt | Contains the output matrix obtained by taking inner product of input and weight matrix and adding bias matrix to it | A x C
-
-- **Errors raised**: 
-  - Size mismatch for multiplication
-  - Size mismatch for addition
-    
-
-### -  Non-Linear Activations 
-- Prints a matrix with non - linear activations of an input matrix of any size with relu and tanh functions on individual matrix elements
-
-Example:
-
-```
-./yourcode.out activation relu inputmatrix.txt outputmatrix.txt
-./yourcode.out activation tanh inputmatrix.txt outputmatrix.txt
-```
-
-Filename | Description | Size
------------- | ------------- | -------------
-inputmatrix.txt | Contains the input matrix | A x B
-outputmatrix.txt | Contains the output matrix obtained by applying relu or tanh function on the input matrix | A x B
-
-   
-
-### -  Subsampling
-
-- Prints a matrix with subsampling of square input matrices of any size with max pooling and average pooling functions
-
-Example:
-
-```
-./yourcode.out pooling max inputmatrix.txt stride outputmatrix.txt
-./yourcode.out pooling average inputmatrix.txt stride outputmatrix.txt
-```
-
-Filename | Description | Size
------------- | ------------- | -------------
-inputmatrix.txt | Contains the input matrix | A x B
-stride | Specify the stride for subsampling | n (Positive Integer)
-outputmatrix.txt | Contains the output matrix obtained by subsampling of square input matrices with max pooling or average pooling functions on the input matrix | A x B
-    
-- **Errors raised**: 
-  - Stride size 0
-  - Matrix not square
-  - Stride does not divide matrix dimension
-
-### -  Vector of Random Floats To A Vector Of Probabilities
-
-- Prints a vector by converting a vector of random floats to a vector of probabilities with softmax and sigmoid functions
-
-Example:
-
-```
-./yourcode.out probability softmax inputvector.txt outputvector.txt
-./yourcode.out probability sigmoid inputvector.txt outputvector.txt
-```
-
-
-## How to input matrix/vector
-
-- Store vectors as first line having size of vector and after that single values in each line of the file
-- Store matrices as first line having column size, 2nd having row size, and after that values of matrix in column major order in each line of the file
-
-
-<hr>
+  - [Implementation of the libaudioAPI](#implementation-of-the-libaudioAPI)
 
 
 ## How to run the code
+Once we have the libaudio.so, simply run the make file by `make` command for compilation of the code. If you want to compile the "libaudio.so" file from source, run `make lib`.
 
-Simply run the make file by `make` command for compilation of the code. use make lib to create the library file libaudio.so.
+Then write the command you want to run, it is of the form `./youcode.out input_fcc_features.txt outputfile.txt`
+eg - 
 
-Then write the command you want to run, eg - ./yourcode.out mfcc_features/ca4d5368_nohash_5.txt out.txt 
+``` 
+./yourcode.out mfcc_features/ca4d5368_nohash_5.txt out.txt 
+```
 
-The output would be appended in the file **out.txt**
+The output would be appended in the file **out.txt**. If the file is not present, a new file is created
 
 Requirement - the variable MKL_BLAS_PATH in environment is set appropriately ($export MKL_BLAS_PATH=/usr/include/mkl). One can also edit the MakeFile to set the MKL_BLAS_PATH appropriately.
+
 
 ## Implementation
 
 We are using our mkl implementation of fully connected layer from stage 2 for this assignment. We have made a libaudio.cpp file which is the cpp file for the library. libaudio.so is the .so file for the library which can be used in other programs after linking and using the -laudio flag.
 
-In main.cpp ...
+In main.cpp we use the libaudioAPI function from the libaudio.so file to get the top 3 indices and their probabilities
 
+### Implementation of the libaudioAPI
 
+The function libaudio implementation typedefines a structure with an integer label and a float prob for probability by the name of pred_t
 
+The function 
+```
+pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred);
 
-## Utils and Misc
+```
 
-1. Python files like "fc_tester.py","file_comp.py" and "stats.py" are helper files, which were used to generate testing data, assert correctness of functions and compute the SD and Avg of data.
-2. debugger.sh implements `make debug`,`make pgebug` and `make debug_all`, used to debug our files.
-3. './yourcode.out timer' runs the FC functions on a set of matrices 100 times and generates a .dat file in /data with the run times
+takes in an input of char*, which is an array of char for the input file name and a pointer for a pred_t array of size 3. This array contains the top 3 probabilites and labels.
+
+The audio sounds it can recognise are
+  {"silence","unknown","yes","no","up","down","left","right","on","off","stop","go"}
+
+Int label of pred_t contains the corresponding index of audio recognised.
+

@@ -12,12 +12,12 @@ extern pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred);
 
 extern void readAudio(const char* filename, float* mat);
 
-extern void relu(int size, float matrix[]);
+extern void relu(const int size, float matrix[]);
 
-extern void softmax(int size, float matrix[]);
+extern void softmax(const int size, float matrix[]);
 
-extern void fullyconnected(int a,int b, int c, float inputMat[],float weightMat[],float biasMat[]);
+extern void fullyconnected(const int a,const int b, const int c, float inputMat[],float weightMat[],float biasMat[]);
 
-extern pred_t getmax (float arr[],int size);
+extern pred_t getmax (const int size,float arr[]);
    
 #endif // libaudio_H

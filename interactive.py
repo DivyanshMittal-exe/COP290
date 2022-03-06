@@ -61,12 +61,12 @@ def calculate_mfcc(audio_signal, audio_sample_rate, window_size, window_stride, 
 def makeInteractive():
         audio, sample_rate =load_wav_file(record_audio(),16000)
         mfccs = calculate_mfcc(audio, sample_rate, 640,640,10)
-        mfccs = tf.reshape(mfccs, [1,250])
-        with tf.Session() as sess:
-            print(*mfccs.eval()[0]) 
-            f = open("interactive_audio.txt","w")
-            f.write(*mfccs.eval()[0])
-            f.close()
+        mfccs = tf.reshape(mfccs, [250]).numpy()
+        print(mfccs) 
+        f = open("interactive_audio.txt","w")
+        for i in range(250):
+            f.write(str(mfccs[i]) + " ")
+        f.close()
         
         make_process = subprocess.Popen("make interactive", stderr=subprocess.STDOUT)
         if make_process.wait() != 0:

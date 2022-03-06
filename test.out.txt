@@ -1,4 +1,1 @@
-mfcc_features/bb05582b_nohash_4.txt go 0.867506no 0.131821unknown 0.000356887
-mfcc_features/bb05582b_nohash_4.txt go 0.867506no 0.131821unknown 0.000356887
-mfcc_features/bb05582b_nohash_4.txt go 0.867506 no 0.131821 unknown 0.000356887 
-mfcc_features/bb05582b_nohash_4.txt go no unknown 0.867506 0.131821 0.000356887 
+

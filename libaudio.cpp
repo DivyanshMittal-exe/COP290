@@ -26,13 +26,13 @@ void readAudio(const char* filename, float* mat)
     infile.close(); //closing file stream
 }
 
-void relu(int size, float matrix[]){
+void relu(const int size, float matrix[]){
     for (int i = 0; i < size; i++)
         {
             matrix[i] = matrix[i]  > 0 ? matrix[i]  : 0;
         }
 }
-void softmax(int size, float matrix[]){
+void softmax(const int size, float matrix[]){
     float sum = 0.0f;
     for (int i=0;i < size;i++)
     {
@@ -44,13 +44,13 @@ void softmax(int size, float matrix[]){
     }
 }
 
-void fullyconnected(int a,int b, int c, float inputMat[],float weightMat[],float biasMat[]){
+void fullyconnected(const int a,const int b, const int c, float inputMat[],float weightMat[],float biasMat[]){
 
     cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, a, c, b, 1.0,  inputMat, b, weightMat, c, 1.0, biasMat,c);
 
 }
 
-pred_t getmax (float arr[],int size = 12){
+pred_t getmax (const int size,float arr[]){
     float max_val= 0.0f;
     int max_locn = 0;
     for (int i = 0; i < size; i++)
@@ -87,15 +87,10 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred){
     relu(144,b3);
     fullyconnected(1,144,12,b3,w4,b4);
     softmax(12,b4);
-
-    // for(int i = 0; i< 12 ;i++){
-    //     std::cout << b4[i] << " ";
-    // }
-
     
-    pred[0] = getmax(b4);
-    pred[1] = getmax(b4);
-    pred[2] = getmax(b4);
+    pred[0] = getmax(12,b4);
+    pred[1] = getmax(12,b4);
+    pred[2] = getmax(12,b4);
     return pred;
 
 }
