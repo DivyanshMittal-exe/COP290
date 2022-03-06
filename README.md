@@ -1,4 +1,4 @@
-# COP290 Subtask 1
+# COP290 Subtask 3
 
 
   - [Available Functions](#Available-Functions)
@@ -23,26 +23,6 @@
 
  - Prints a matrix by taking the inner product of an input matrix of dimensions AxB and a weight matrix of dimensions BxC, to output a matrix of dimension AxC. To this output, a bias vector of dimension AXC is then added elementwise.
 
-- 4 implementations available are:
-  1. Normal 
-    ```
-    make
-    ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
-    ```
-  2. pThreads 
-    ```
-    make
-    ./yourcode.out pthread fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
-    ```
-  3. MKL 
-    ```
-    make mkl
-    ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
-    ```
-  4. Openblas 
-    ```
-    make oblas
-    ./yourcode.out oblas fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt
     ```
 
 
@@ -108,40 +88,10 @@ Example:
 ./yourcode.out probability sigmoid inputvector.txt outputvector.txt
 ```
 
-Filename | Description | Size
------------- | ------------- | -------------
-inputvector.txt | Contains the input matrix | A x 1
-outputvector.txt | Contains vector of probabilities obtained by converting input vector with softmax or sigmoid functions | A x 1
-    
-<hr>
-
-## Data fully connected
-
-Implementation | Size | Average | Stand Dev
------------- | ------------- | ------------- | -------------
-Plain | 100 x 100 | 9083.77 | 1057.02
-Plain | 200 x 200 | 63055.11 | 1912.02
-Plain | 300 x 300 | 213294.74 | 11255.28
-PThread | 100 x 100 | 7526.6 | 640.79
-PThread | 200 x 200 | 54287.89 | 2786.88
-PThread | 300 x 300 | 196778.34 | 17200.90
-MKL | 100 x 100 | 375.11 | 2546.68
-MKL | 200 x 200 | 372.44 | 2092.87
-MKL | 300 x 300 | 549.07 | 1989.19
-OBlas | 100 x 100 | 1603.51 |4911.01
-OBlas | 200 x 200 | 221.77 |535.98
-OBlas | 300 x 300 | 519.94 |1041.76
-
 ## Inference
 What we observed was that MKL was the fastest implementation, then OpenBLAS, then PThreads and the normal implementation was the slowest. There was a huge gap between Pthreads and the optimised libraries.
 
 The mkl and openblas libraries are magnitudes faster than our naiive implementations. While we have tried to optimise our code as much as possible. Eg we pass parameters which dont change as const reference, so that we dont waste time copying parameters. For multiplication, we take transpose of matrix, to convert the column into a continuous vector<float>, as reading contigous memory is faster. pThreads breaks the task into 16 chunks by creating 16 threads. 
-
-
-## Sample Graphs 
-<img src="graphs/graph100.png" alt="g1" style="width:200px;"/>
-<img src="graphs/graph200.png" alt="g2" style="width:200px;"/>
-<img src="graphs/graph300.png" alt="g3" style="width:200px;"/>
 
 
 ## How to input matrix/vector
@@ -155,13 +105,13 @@ The mkl and openblas libraries are magnitudes faster than our naiive implementat
 
 ## How to run the code
 
-Simply run the make file by `make` command for plain and pthreads implementation, `make mkl` command for mkl or `make oblas` for oblas implementation.
+Simply run the make file by `make` command for compilation of the code. use make lib to create the library file libaudio.so.
 
-Then write the command you want to run, similarly to the example given above. 
+Then write the command you want to run, eg - ./yourcode.out mfcc_features/ca4d5368_nohash_5.txt out.txt 
 
-The output would be written in the file **outputvector.txt**/**outputmatrix.txt**
+The output would be appended in the file **out.txt**
 
-Use `make plot` command to make a GNUPlot of the data in /data
+Requirement - the variable MKL_BLAS_PATH in environment is set appropriately ($export MKL_BLAS_PATH=/usr/include/mkl). One can also edit the MakeFile to set the MKL_BLAS_PATH appropriately.
 
 ## Internal Implementation
 
