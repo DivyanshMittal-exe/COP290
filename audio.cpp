@@ -1,43 +1,101 @@
-#include <string>
-#include <iostream>
 #include "libaudio.h"
+#include <vector>
+#include <mkl.h>
+#include <math.h>
+#include <iostream>
 #include <fstream>
-
-
-//I am storing a matrix as a array of doubles (Column Major format)
-//For a matrix I am storing the dimension in a pair (col,row)
+#include "dnn_weights.h"
 
 
 
-int main(int argc, char *argv[])
+void readAudio(const char* filename, float* mat)
 {
-     try
+    //Handling file handling exceptions
+    std::ifstream infile;
+    infile.open(filename); //opening file stream
+    if (!infile)
     {
-        if (argc == 1)
+        throw "Error, File couldn't be opened";
+    }
+    
+    for (int i = 0; i < 250; i++)
+    {
+        infile >> mat[i];
+    }
+
+    infile.close(); //closing file stream
+}
+
+void relu(int size, float matrix[]){
+    for (int i = 0; i < size; i++)
         {
-            // No arguments given
-            throw "Invalid format. No arguments given. Check out README for valid format.";
-        }else if (argc == 3){
-            std::string audios[] = {"silence","unknown","yes","no","up","down","left","right","on","off","stop","go"};
-            pred_t prediction[3];
-            libaudioAPI(argv[1],prediction);
-            std::ofstream outfile;
-            outfile.open(argv[2] , std::ios_base::app | std::ios_base::out);
-            outfile << argv[1] << " ";
-            outfile << audios[prediction[0].label] << " " << audios[prediction[1].label] << " " << audios[prediction[2].label] << " " ;
-            outfile << prediction[0].prob << " "<< prediction[1].prob << " " << prediction[2].prob << " ";
-            outfile << std::endl;
-            outfile.close();
-
-        }else {
-             throw "Invalid format. Correct format is as follows - ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt";
+            matrix[i] = matrix[i]  > 0 ? matrix[i]  : 0;
         }
-
-    }
-    catch (const std::exception &e)
+}
+void softmax(int size, float matrix[]){
+    float sum = 0.0f;
+    for (int i=0;i < size;i++)
     {
-        std::cerr << e.what() << '\n';
+        sum += exp(matrix[i]);
     }
+    for (int i=0;i < size;i++)
+    {
+        matrix[i] = exp(matrix[i])/sum;
+    }
+}
 
-    return 0;
+void fullyconnected(int a,int b, int c, float inputMat[],float weightMat[],float biasMat[]){
+
+    cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, a, c, b, 1.0,  inputMat, b, weightMat, c, 1.0, biasMat,c);
+
+}
+
+pred_t getmax (float arr[],int size = 12){
+    float max_val= 0.0f;
+    int max_locn = 0;
+    for (int i = 0; i < size; i++)
+    {   
+        max_val = std::max(max_val,arr[i]);
+        max_locn = max_val==arr[i] ? i:max_locn;
+    }
+    arr[max_locn] *= -1;
+    pred_t to_return;
+    to_return.label = max_locn;
+    to_return.prob = max_val;
+    return to_return;
+}
+
+pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred){
+    float w1[] = IP1_WT;
+    float w2[] = IP2_WT;
+    float w3[] = IP3_WT;
+    float w4[] = IP4_WT;
+
+    float b1[] = IP1_BIAS;
+    float b2[] = IP2_BIAS;
+    float b3[] = IP3_BIAS;
+    float b4[] = IP4_BIAS;
+
+    float inputMat[250];
+    readAudio(audiofeatures, inputMat);
+
+    fullyconnected(1,250,144,inputMat,w1,b1);
+    relu(144,b1);
+    fullyconnected(1,144,144,b1,w2,b2);
+    relu(144,b2);
+    fullyconnected(1,144,144,b2,w3,b3);
+    relu(144,b3);
+    fullyconnected(1,144,12,b3,w4,b4);
+    softmax(12,b4);
+
+    // for(int i = 0; i< 12 ;i++){
+    //     std::cout << b4[i] << " ";
+    // }
+
+    
+    pred[0] = getmax(b4);
+    pred[1] = getmax(b4);
+    pred[2] = getmax(b4);
+    return pred;
+
 }

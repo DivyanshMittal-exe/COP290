@@ -3,25 +3,27 @@
 .PHONY: pdebug
 .PHONY: debug_all
 
+MKL_BLAS_PATH = /usr/include/mkl
+
 all:
 	@echo "Compiling"
 	@make run
 
-run: audio.o libaudio.o 
-	g++ -I /usr/include/mkl  -O3 -g audio.o libaudio.o -o yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
-
-libaudio.o: libaudio.cpp
-	g++ -c -g libaudio.cpp 
+run: main.o audio.o 
+	g++ -I /usr/include/mkl  -O3 -g main.o audio.o -o yourcode.out -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 
 audio.o: audio.cpp
-	@g++ -O3 -c -g audio.cpp
+	g++ -c -g audio.cpp 
 
-lib: libaudio.cpp
-	g++ -I /usr/include/mkl -c -Wall -Werror -fpic libaudio.cpp -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
-	g++ -shared -o liblibaudio.so libaudio.o
+main.o: main.cpp
+	@g++ -O3 -c -g main.cpp
 
-test: audio.cpp
-	g++ -I /usr/include/mkl -L . -Wall -o yourcode.out audio.cpp -llibaudio -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+lib: audio.cpp
+	g++ -I $(MKL_BLAS_PATH) -c -Wall -Werror -fpic audio.cpp -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
+	g++ -shared -o libaudio.so audio.o
+
+compile: main.cpp
+	g++ -I $(MKL_BLAS_PATH) -L . -Wl,-rpath=. -Wall -o yourcode.out main.cpp -laudio -fopenmp -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 
 
 debug: clean run
