@@ -20,6 +20,13 @@ audio.o: audio.cpp
 debug: clean run
 	sh debugger.sh debug
 
+interactive: 
+	make run
+	./yourcode.out interactive_audio.txt interactive_output.txt
+
+live:
+	python interactive.py
+
 clean:
 	@rm -rf *.o *.out lib/Plain/*.o lib/pThread/*.o 
 
