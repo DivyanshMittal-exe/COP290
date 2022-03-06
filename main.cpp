@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
             outfile.close();
 
         }else {
-             throw std::runtime_error("Invalid format. Correct format is as follows - ./yourcode.out mkl fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt");
+             throw std::runtime_error("Invalid format. Correct format is as follows - ./yourcode.out audiosamplefile outputfile");
         }
     }
     catch (const std::exception &e)
